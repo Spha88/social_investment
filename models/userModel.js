@@ -7,13 +7,12 @@ const userSchema = new Schema({
     password: { type: String, require: true },
 });
 
-userSchema.pre('save', next => {
+userSchema.pre('save', function (next) {
     const user = this;
     // generate a salt then run callback
     bcrypt.genSalt(10, (err, salt) => {
-        console.log('Salt is lol: ' + salt);
-        if (err) { return next(err); }
 
+        if (err) { return next(err); }
 
         // hash/encrypt password using the generated salt
         bcrypt.hash(user.password, salt, (err, hash) => {
