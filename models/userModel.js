@@ -27,4 +27,13 @@ userSchema.pre('save', function (next) {
     })
 })
 
+// Compare encrypted password on login
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        if (err) { return callback(err); }
+
+        callback(null, isMatch);
+    });
+}
+
 module.exports = mongoose.model('User', userSchema);

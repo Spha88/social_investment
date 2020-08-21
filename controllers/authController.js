@@ -9,7 +9,7 @@ const generateToken = user => {
     const payload = { email: user.email, id: user._id }
 
     // create and return token;
-    return jwt.sign(payload, secret, { expiresIn: '2h' });
+    return jwt.sign(payload, secret, { expiresIn: '1h' });
 }
 
 // SignUp
@@ -32,8 +32,22 @@ exports.authSignup = (req, res, next) => {
         user.save(err => {
             if (err) { return res.status(500).json({ error: 'Could not save user' }); }
 
-            // Save successfully send a JWT token back
+            // Saved successfully respond with JWT token
             res.status(200).json({ token: generateToken(user) });
         });
     });
+}
+
+// USER SIGN IN OR LOG IN
+exports.authSignin = (req, res) => {
+    /**
+     *  LocalStrategy already checked the user is registered all we need to do
+     *  here is give the user a token to use in subsequent requests. 
+     */
+    if (req.user) {
+        res.status(200).json({ token: generateToken(req.user) });
+    } else {
+        res.status(400).json({ error: 'Unauthorized' });
+    }
+
 }
