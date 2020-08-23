@@ -12,5 +12,5 @@ const loanSchema = new Schema({
     acceptedOffer: { type: Schema.Types.ObjectId, ref: 'Offer' }
 })
 
-module.exports = mongoose.model('Loan', postSchema);
+module.exports = mongoose.model('Loan', loanSchema);
 
