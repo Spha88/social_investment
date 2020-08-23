@@ -1,11 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const db = require('./utilities/db');
+const cors = require('cors');
 
 const app = express();
 db();
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
