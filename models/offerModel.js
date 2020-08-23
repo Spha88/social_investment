@@ -7,4 +7,4 @@ const offerSchema = new Schema({
     client: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 
-module.exports = mongoose.model('Offer', offer);
+module.exports = mongoose.model('Offer', offerSchema);
