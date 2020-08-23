@@ -1,18 +1,47 @@
 const Offer = require('../models/offerModel');
+const Loan = require('../models/loanModel');
 
 // Get all offers for a loan
 exports.getOffers = (req, res) => {
-    res.send('NYI: Get all offers to a loan. LoanId: ' + req.params.id);
+    Offer.find({ loan: req.params.id }, (err, offers) => {
+        if (err) return res.status(500).json({ error: "Could not find offers" });
+
+        if (!offers.length) return res.status(400).json({ error: "Could not find offers" });
+
+        res.status(200).json(offers);
+    })
 }
 
 // Create or add offer to a loan
 exports.createOffer = (req, res) => {
-    res.send('NYI: Add new offer to a loan. LoanId: ' + req.params.id);
+    const offer = new Offer({
+        interest: req.body.interest,
+        client: req.body.client,
+        loan: req.params.id
+    });
+
+    // add offer to loan
+    Loan.updateOne({ _id: req.params.id }, { $push: { offers: offer } }, (err, raw) => {
+        if (err) return res.json({ error: "Could not add offer to the loan" });
+
+        // Save offer to database
+        offer.save((err, offer) => {
+            if (err) return res.status(500).json({ error: "Could not add offer" });
+
+            res.status(200).json({ success: "offer added to loan" });
+        });
+    });
 }
 
 // Get one offer info
 exports.getOffer = (req, res) => {
-    res.send('NYI: Show info about one offer. OfferId: ' + req.params.offerid + 'loan id: ' + req.params.id);
+    Offer.findById(req.params.offerid, (err, offer) => {
+        if (err) return res.status(500).json({ error: "Could not find offer" });
+
+        if (!offer) return res.status(400).json({ error: "No offer found with that id" });
+
+        res.json({ offer })
+    })
 }
 
 // Delete an offer
