@@ -23,6 +23,7 @@ exports.createLoan = (req, res) => {
         amount: req.body.amount,
         interest: req.body.interest,
         term: req.body.term,
+        applicant: req.body.applicant
     })
 
     loan.save(err => {
