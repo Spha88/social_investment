@@ -1,7 +1,9 @@
+const { body, validationResult } = require('express-validator');
+const async = require('async');
+
 const Loan = require('../models/loanModel');
 const moment = require('moment');
-const { json } = require('express');
-const { populate } = require('../models/loanModel');
+
 
 
 // Find all loans
@@ -17,26 +19,41 @@ exports.getLoans = (req, res, next) => {
 }
 
 // Create new loan
-exports.createLoan = (req, res) => {
+exports.createLoan = [
+    // Make sure none of the fields are empty
+    body('amount').isLength({ min: 1 }),
+    body('interest').isLength({ min: 1 }),
+    body('term').isLength({ min: 1 }),
 
-    const loan = new Loan({
-        amount: req.body.amount,
-        interest: req.body.interest,
-        term: req.body.term,
-        applicant: req.body.applicant
-    })
+    (req, res) => {
 
-    loan.save(err => {
-        if (err) {
-            console.log(err);
-            return res.status(500).json({ error: "Could Not Complete Loan Application" })
-        };
+        // Check for errors in the above code
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-        res.status(200).json({ message: 'Loan application complete' });
-    })
+        // If no errors create a Loan and save to DB
+        const loan = new Loan({
+            amount: req.body.amount,
+            interest: req.body.interest,
+            term: req.body.term,
+            applicant: req.body.applicant
+        })
 
-}
+        loan.save(err => {
 
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ error: "Could Not Complete Loan Application" })
+            };
+
+            res.status(200).json({ message: 'Loan application complete' });
+        })
+
+    }
+
+]
 exports.getLoan = (req, res) => {
     Loan.findById(req.params.id).populate('offers').exec((err, loan) => {
         if (err) return res.status(500).json({ error: 'Could not get a loan with id' });

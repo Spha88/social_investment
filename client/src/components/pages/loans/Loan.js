@@ -19,12 +19,15 @@ const Loan = ({ loan }) => {
         setTimeout(() => {
             Axios.post(`http://localhost:3000/loans/${currentLoan._id}/offers`, { ...data, client: '5f3fbf055ff56d08748eb32a' })
                 .then(res => {
+                    console.log("Response")
                     setShowOfferForm(false);
                     setAddingOffer(false);
                     setCurrentLoan(res.data.loan);
 
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    alert("The has been an error")
+                });
         }, 1000)
     };
 

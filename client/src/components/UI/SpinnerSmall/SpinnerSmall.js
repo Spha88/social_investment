@@ -3,7 +3,7 @@ import classes from './SpinnerSmall.module.css';
 
 const SpinnerSmall = () => {
     return (
-        <div class={classes.lsdDualRing}></div>
+        <div className={classes.lsdDualRing}></div>
     )
 }
 

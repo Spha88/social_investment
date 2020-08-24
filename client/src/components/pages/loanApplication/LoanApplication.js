@@ -8,23 +8,41 @@ import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 const LoanApplication = () => {
 
     const [addingLoan, setAddingLoan] = useState(false);
-    const [loanAdded, setLoanAdded] = useState(false);
-    const { register, handleSubmit } = useForm();
+    const [displayFeedBackMessage, setDisplayFeedBackMessage] = useState(false);
+    const [feedBackMessage, setFeedBackMessage] = useState('');
+    const [error, setError] = useState(false);
+
+    const { register, handleSubmit, errors } = useForm();
 
     let history = useHistory();
 
-    const redirect = () => {
+    const successRedirect = () => {
         // Display success message before redirect for 3 seconds
-        setLoanAdded(true);
+        setDisplayFeedBackMessage(true);
+        setFeedBackMessage('Loan application added, you will be redirected');
 
         setTimeout(() => {
             history.push('/loans');
         }, 4000)
     }
 
+    const warnApplicationFailure = () => {
+        // When error is true feedback message background will be red;
+        setError(true);
+        setAddingLoan(false);
+        setDisplayFeedBackMessage(true);
+        setFeedBackMessage("Sorry loan application did not go through, try again later");
+
+        // Hide feedback message after 4 seconds;
+        setTimeout(() => {
+            setDisplayFeedBackMessage(false);
+            setError(false);
+        }, 4000);
+    }
+
     const onSubmit = data => {
 
-        // Display a spinner while adding loan is true
+        // Display a spinner while adding loan.
         setAddingLoan(true);
 
         axios.post('http://localhost:3000/loans', { ...data, applicant: "5f3fbf055ff56d08748eb32a" })
@@ -33,9 +51,9 @@ const LoanApplication = () => {
                 // remove the spinner
                 setAddingLoan(false);
 
-                redirect();
+                successRedirect();
             })
-            .catch(err => console.log(err));
+            .catch(err => warnApplicationFailure());
 
     }
 
@@ -55,10 +73,10 @@ const LoanApplication = () => {
             )}
 
             {/* Display message after adding a loan for 3 seconds */}
-            {loanAdded && (
+            {displayFeedBackMessage && (
                 <div className="absolute flex justify-center content-center border inset-0 h-full w-full bg-white bg-opacity-75 p-5">
-                    <div className="self-center bg-blue-700 text-white rounded p-5 px-8">
-                        Loan application added, you will be redirected to home page
+                    <div className={`self-center ${error ? 'bg-red-800' : 'bg-blue-700'} text-white rounded p-5 px-8`}>
+                        {feedBackMessage}
                     </div>
                 </div>
             )}
@@ -74,22 +92,34 @@ const LoanApplication = () => {
                     <div className="p-2 w-full">
                         <input name="amount" placeholder="Amount" type="number" step="50"
                             className={inputClasses}
-                            ref={register}
+                            ref={register({ required: 'Enter the loan amount' })}
                         />
+                        {/** Error message */}
+                        {errors.amount && (
+                            <div className="text-red-500 pl-5">{errors.amount.message}</div>
+                        )}
                     </div>
 
                     <div className="p-2 w-full">
                         <input name="interest" placeholder="Interest" type="number" step="0.10"
                             className={inputClasses}
-                            ref={register}
+                            ref={register({ required: 'Interest is required' })}
                         />
+                        {/** Error message */}
+                        {errors.interest && (
+                            <div className="text-red-500 pl-5">{errors.interest.message}</div>
+                        )}
                     </div>
 
                     <div className="p-2 w-full">
                         <input name="term" placeholder="Term" type="number"
                             className={inputClasses}
-                            ref={register}
+                            ref={register({ required: 'Term is required' })}
                         />
+                        {/** Error message */}
+                        {errors.term && (
+                            <div className="text-red-500 pl-5">{errors.term.message}</div>
+                        )}
                     </div>
 
                     <div className="p-2 w-full">
