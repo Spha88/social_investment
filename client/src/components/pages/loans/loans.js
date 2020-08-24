@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Loan from './Loan';
+import Spinner from '../../UI/Spinner/Spinner';
 
 const Loans = () => {
 
@@ -10,7 +11,7 @@ const Loans = () => {
     useEffect(() => {
         axios.get('http://localhost:3000/loans')
             .then(res => {
-                setLoans(res.data.loans);
+                setTimeout(() => { setLoans(res.data.loans); }, 1000);
             })
             .catch(err => {
                 console.log(err);
@@ -23,10 +24,19 @@ const Loans = () => {
                 <h2 className="text-4xl text-center mb-5">Loans</h2>
             </header>
             <main className="flex flex-wrap mb-4 w-full">
-                {loans.map(loan => (
-                    <Loan key={loan._id} loan={loan} />
-                ))}
+                {loans.length ? (
+
+                    loans.map(loan => (
+                        <Loan key={loan._id} loan={loan} />
+                    ))
+
+                ) :
+                    <div className="w-full h-screen flex justify-center pt-20">
+                        <Spinner />
+                    </div>
+                }
             </main>
+
         </div>
     )
 }
