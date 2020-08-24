@@ -19,7 +19,7 @@ const LoanApplication = () => {
 
         setTimeout(() => {
             history.push('/loans');
-        }, 3000)
+        }, 4000)
     }
 
     const onSubmit = data => {

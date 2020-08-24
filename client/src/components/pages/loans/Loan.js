@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Axios from 'axios';
 
 import { formatDate } from '../../../utilities/utilities';
-import Spinner from '../../UI/Spinner/Spinner';
+import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
 const Loan = ({ loan }) => {
     const [currentLoan, setCurrentLoan] = useState(loan);
@@ -59,8 +59,9 @@ const Loan = ({ loan }) => {
                     {showOfferForm && (
 
                         <div className="text-black mb-2">
+                            {/** While adding an offer display Spinner otherwise form */}
                             {addingOffer ?
-                                <Spinner />
+                                <SpinnerSmall />
                                 : <form onSubmit={handleSubmit(submit)}>
                                     <input
                                         className="w-full border border-gray-500 rounded p-2 mb-3"

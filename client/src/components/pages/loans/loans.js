@@ -25,11 +25,9 @@ const Loans = () => {
             </header>
             <main className="flex flex-wrap mb-4 w-full">
                 {loans.length ? (
-
                     loans.map(loan => (
                         <Loan key={loan._id} loan={loan} />
                     ))
-
                 ) :
                     <div className="w-full h-screen flex justify-center pt-20">
                         <Spinner />
