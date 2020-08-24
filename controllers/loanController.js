@@ -21,9 +21,15 @@ exports.getLoans = (req, res, next) => {
 // Create new loan
 exports.createLoan = [
     // Make sure none of the fields are empty
-    body('amount').isLength({ min: 1 }),
-    body('interest').isLength({ min: 1 }),
-    body('term').isLength({ min: 1 }),
+    body('amount')
+        .notEmpty().withMessage('Amount should not be empty')
+        .isInt().withMessage('Amount must be an integer'),
+    body('interest')
+        .notEmpty().withMessage('Interest should not be empty')
+        .isFloat().withMessage('Interest should be a float'),
+    body('term')
+        .notEmpty().withMessage('Term should not be empty')
+        .isInt().withMessage('Term should be a number with no decimal'),
 
     (req, res) => {
 

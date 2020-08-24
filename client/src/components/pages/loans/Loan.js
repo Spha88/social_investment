@@ -10,7 +10,7 @@ const Loan = ({ loan }) => {
     const [showOfferForm, setShowOfferForm] = useState(false);
     const [addingOffer, setAddingOffer] = useState(false);
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, errors } = useForm();
 
     const submit = data => {
         setAddingOffer(true);
@@ -67,10 +67,14 @@ const Loan = ({ loan }) => {
                                 <SpinnerSmall />
                                 : <form onSubmit={handleSubmit(submit)}>
                                     <input
-                                        className="w-full border border-gray-500 rounded p-2 mb-3"
-                                        ref={register}
+                                        className={`w-full border ${errors.interest ? 'border-red-500' : 'border-gray-500'}  rounded p-2 outline-none`}
+                                        ref={register({ required: 'Interest is required on offer' })}
                                         type="number" min="0" max="35"
                                         name="interest" placeholder="Enter Interest" step="0.10" />
+
+                                    {/** Show error message if there is an error */}
+                                    <div className="mb-3 text-red-500">{errors.interest && errors.interest.message}</div>
+
 
                                     <button className="hover:bg-teal-700 shadow rounded bg-teal-500  py-1 px-3 mr-2" type="submit">Add Offer</button>
                                     <div
