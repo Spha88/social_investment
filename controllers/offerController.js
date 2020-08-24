@@ -21,14 +21,19 @@ exports.createOffer = (req, res) => {
     });
 
     // add offer to loan
-    Loan.updateOne({ _id: req.params.id }, { $push: { offers: offer } }, (err, raw) => {
+    Loan.findOneAndUpdate({ _id: req.params.id }, { $push: { offers: offer } }, { new: true }, (err, doc) => {
         if (err) return res.json({ error: "Could not add offer to the loan" });
 
         // Save offer to database
-        offer.save((err, offer) => {
+        offer.save(err => {
             if (err) return res.status(500).json({ error: "Could not add offer" });
 
-            res.status(200).json({ success: "offer added to loan" });
+            // return updated loan
+            Loan.findById(req.params.id).populate('offers').exec((err, loan) => {
+                if (err) return res.json({ error: 'could not get updated loan please refresh page' });
+
+                res.status(200).json({ loan });
+            })
         });
     });
 }

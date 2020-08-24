@@ -1,18 +1,20 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const LoanApplication = () => {
 
     const { register, handleSubmit } = useForm();
 
-    // let history = useHistory();
+    let history = useHistory();
 
     const onSubmit = data => {
 
         axios.post('http://localhost:3000/loans', { ...data, applicant: "5f3fbf055ff56d08748eb32a" })
-            .then(res => console.log(res))
+            .then(res => {
+                history.push('/loans');
+            })
             .catch(err => console.log(err));
 
     }
@@ -32,14 +34,14 @@ const LoanApplication = () => {
                 <form className="flex flex-wrap -m-2" onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="p-2 w-full">
-                        <input name="amount" placeholder="Amount" type="number"
+                        <input name="amount" placeholder="Amount" type="number" step="50"
                             className={inputClasses}
                             ref={register}
                         />
                     </div>
 
                     <div className="p-2 w-full">
-                        <input name="interest" placeholder="Interest" type="number"
+                        <input name="interest" placeholder="Interest" type="number" step="0.10"
                             className={inputClasses}
                             ref={register}
                         />

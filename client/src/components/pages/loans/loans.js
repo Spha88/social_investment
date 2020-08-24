@@ -22,7 +22,7 @@ const Loans = () => {
             <header>
                 <h2 className="text-4xl text-center mb-5">Loans</h2>
             </header>
-            <main className="flex flex-wrap mb-4">
+            <main className="flex flex-wrap mb-4 w-full">
                 {loans.map(loan => (
                     <Loan key={loan._id} loan={loan} />
                 ))}

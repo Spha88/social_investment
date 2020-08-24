@@ -7,13 +7,13 @@ import LoanApplication from './components/pages/loanApplication/LoanApplication'
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <Navigation />
       <Switch>
         <Route path="/loans" component={Loans} />
         <Route path="/apply" component={LoanApplication} />
       </Switch>
-    </div>
+    </React.Fragment>
   );
 }
 
