@@ -20,7 +20,7 @@ const Loans = () => {
 
     return (
         <div className="container mx-auto my-10 bg-white rounded shadow-lg p-5">
-            <header>
+            <header className="pt-10">
                 <h2 className="text-4xl text-center mb-5">Loans</h2>
             </header>
             <main className="flex flex-wrap mb-4 w-full">

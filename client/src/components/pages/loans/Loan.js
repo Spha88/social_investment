@@ -3,20 +3,29 @@ import { useForm } from 'react-hook-form';
 import Axios from 'axios';
 
 import { formatDate } from '../../../utilities/utilities';
+import Spinner from '../../UI/Spinner/Spinner';
 
 const Loan = ({ loan }) => {
     const [currentLoan, setCurrentLoan] = useState(loan);
     const [showOfferForm, setShowOfferForm] = useState(false);
+    const [addingOffer, setAddingOffer] = useState(false);
 
     const { register, handleSubmit } = useForm();
 
     const submit = data => {
-        Axios.post(`http://localhost:3000/loans/${currentLoan._id}/offers`, { ...data, client: '5f3fbf055ff56d08748eb32a' })
-            .then(res => {
-                setShowOfferForm(false);
-                setCurrentLoan(res.data.loan);
-            })
-            .catch(err => console.log(err));
+        setAddingOffer(true);
+
+        // Todo = remove setTimeout in production
+        setTimeout(() => {
+            Axios.post(`http://localhost:3000/loans/${currentLoan._id}/offers`, { ...data, client: '5f3fbf055ff56d08748eb32a' })
+                .then(res => {
+                    setShowOfferForm(false);
+                    setAddingOffer(false);
+                    setCurrentLoan(res.data.loan);
+
+                })
+                .catch(err => console.log(err));
+        }, 1000)
     };
 
     return (
@@ -48,20 +57,24 @@ const Loan = ({ loan }) => {
 
                 <footer className="mt-3 text-center text-sm text-white">
                     {showOfferForm && (
+
                         <div className="text-black mb-2">
-                            <form onSubmit={handleSubmit(submit)}>
-                                <input
-                                    className="w-full border border-gray-500 rounded p-2 mb-3"
-                                    ref={register}
-                                    type="number" min="0" max="35"
-                                    name="interest" placeholder="Enter Interest" step="0.10" />
+                            {addingOffer ?
+                                <Spinner />
+                                : <form onSubmit={handleSubmit(submit)}>
+                                    <input
+                                        className="w-full border border-gray-500 rounded p-2 mb-3"
+                                        ref={register}
+                                        type="number" min="0" max="35"
+                                        name="interest" placeholder="Enter Interest" step="0.10" />
 
-                                <button className="hover:bg-teal-700 shadow rounded bg-teal-500  py-1 px-3 mr-2" type="submit">Add Offer</button>
-                                <div
-                                    onClick={() => setShowOfferForm(!showOfferForm)}
-                                    className="hover:bg-red-700 shadow rounded bg-red-500 cursor-pointer  py-1 px-3 inline-block">Cancel</div>
+                                    <button className="hover:bg-teal-700 shadow rounded bg-teal-500  py-1 px-3 mr-2" type="submit">Add Offer</button>
+                                    <div
+                                        onClick={() => setShowOfferForm(!showOfferForm)}
+                                        className="hover:bg-red-700 shadow rounded bg-red-500 cursor-pointer  py-1 px-3 inline-block">Cancel</div>
 
-                            </form>
+                                </form>
+                            }
                         </div>
                     )}
 
