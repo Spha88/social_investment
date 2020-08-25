@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Axios from 'axios';
+import Axios from '../../../axios-api';
 
 import { formatDate } from '../../../utilities/utilities';
 import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
@@ -17,7 +17,7 @@ const Loan = ({ loan }) => {
 
         // Todo = remove setTimeout in production
         setTimeout(() => {
-            Axios.post(`http://localhost:3000/loans/${currentLoan._id}/offers`, { ...data, client: '5f3fbf055ff56d08748eb32a' })
+            Axios.post(`/loans/${currentLoan._id}/offers`, { ...data, client: '5f3fbf055ff56d08748eb32a' })
                 .then(res => {
                     console.log("Response")
                     setShowOfferForm(false);

@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const navigation = ({ token }) => {
+
+    const active = 'text-teal-500 border-b-2 border-gray-600 inline-block';
+    const navItemClasses = 'mr-5 hover:text-gray-900';
     return (
         <header className="text-gray-700">
             <div className="container mx-auto lg:px-5 bg-white mt-5 shadow-lg rounded flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -15,25 +18,25 @@ const navigation = ({ token }) => {
 
                 <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
                     <NavLink
-                        activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
-                        className="mr-5 hover:text-gray-900" to="/loans">Loans</NavLink>
+                        activeClassName={active}
+                        className={navItemClasses} to="/loans">Loans</NavLink>
                     <NavLink
-                        activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
-                        className="mr-5 hover:text-gray-900" to="/apply">Get a loan</NavLink>
+                        activeClassName={active}
+                        className={navItemClasses} to="/apply">Get a loan</NavLink>
                     <NavLink
-                        activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
-                        className="mr-5 hover:text-gray-900" to="/profile">Profile</NavLink>
+                        activeClassName={active}
+                        className={navItemClasses} to="/profile">Profile</NavLink>
                     <NavLink
-                        activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
-                        className="mr-5 hover:text-gray-900" to="/help">Help</NavLink>
+                        activeClassName={active}
+                        className={navItemClasses} to="/help">Help</NavLink>
                     <NavLink
-                        activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
-                        className="mr-5 hover:text-gray-900" to="/support">Support</NavLink>
+                        activeClassName={active}
+                        className={navItemClasses} to="/support">Support</NavLink>
 
                     {!token &&
                         <NavLink
-                            activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
-                            className="mr-5 hover:text-gray-900" to="/signup">Sign up</NavLink>
+                            activeClassName={active}
+                            className={navItemClasses} to="/signup">Sign up</NavLink>
                     }
 
                 </nav>
@@ -61,4 +64,4 @@ const mapStateToProps = state => ({
     token: state.auth.token
 })
 
-export default connect(mapStateToProps)(navigation)
+export default connect(mapStateToProps)(navigation);

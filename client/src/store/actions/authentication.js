@@ -1,5 +1,5 @@
 import * as actionTypes from '../actionTypes';
-import axios from 'axios';
+import axios from '../../axios-api';
 
 const loggingIn = () => ({ type: actionTypes.LOGGING_IN })
 
@@ -14,7 +14,7 @@ export const authenticate = loginDetails => dispatch => {
     // Start login
     dispatch(loggingIn());
 
-    axios.post('http://localhost:3000/auth/signin', loginDetails)
+    axios.post('/auth/signin', loginDetails)
         .then(res => {
             // Save token to local storage for persistance
             localStorage.setItem('token', res.data.token);
