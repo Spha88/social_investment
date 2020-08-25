@@ -5,12 +5,14 @@ import Navigation from './components/navigation/navigation';
 import Loans from './components/pages/loans/Loans';
 import LoanApplication from './components/pages/loanApplication/LoanApplication';
 import Profile from './components/pages/Profile/Profile';
+import Login from './components/pages/Login/Login';
 
 function App() {
   return (
     <React.Fragment>
       <Navigation />
       <Switch>
+        <Route path="/login" component={Login} />
         <Route path="/loans" component={Loans} />
         <Route path="/apply" component={LoanApplication} />
         <Route path="/profile" component={Profile} />
