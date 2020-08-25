@@ -1,8 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import industries from './listOfIndustries';
-
 const BankingDetails = () => {
     const { register, handleSubmit } = useForm();
     const submit = data => console.log(data);
@@ -89,9 +87,6 @@ const inputClasses = `
         focus:border-teal-500
         focus:outline-none
     `
-const inputGroupClasses = `
-        border rounded px-5 py-2 mb-2 w-full focus:border-4 focus:border-teal-500 focus:outline-none
-`
 const errorClasses = `
         error text-center text-red-700 h-5
     `

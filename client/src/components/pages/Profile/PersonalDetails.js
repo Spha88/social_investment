@@ -15,7 +15,7 @@ const PersonalDetails = () => {
                 <div className="mb-5">
                     <div className={labelInputContClasses} >
                         <label className={labelClasses} htmlFor="name">Name</label>
-                        <input className={inputClasses} type="text" name="name" placeholder="Enter your name" />
+                        <input className={inputClasses} ref={register} type="text" name="name" placeholder="Enter your name" />
                     </div>
                     <div className={errorClasses}></div>
                 </div>

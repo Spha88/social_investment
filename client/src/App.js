@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 
 import Navigation from './components/navigation/navigation';
 import Loans from './components/pages/loans/Loans';
@@ -16,7 +17,7 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/loans" component={Loans} />
-        <Route path="/apply" component={LoanApplication} />
+        <ProtectedRoute path="/apply" component={LoanApplication} />
         <Route path="/profile" component={Profile} />
       </Switch>
     </React.Fragment>

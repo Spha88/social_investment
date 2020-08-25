@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { authenticate } from '../../../store/actions/index';
 
 import Container from '../../UI/Container';
 import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
-const Login = () => {
-    const [loggingIn, setLoggingIn] = useState(false);
-    const [displayFeedBackMessage, setDisplayFeedBackMessage] = useState(false);
+const Login = ({ authenticate, loggingIn, loggedIn, errorMessage, error }) => {
 
     const { register, handleSubmit, errors } = useForm();
     const history = useHistory();
 
-    const onSubmit = data => {
-        // Display a spinner while logging in.
-        setLoggingIn(true);
-        setTimeout(() => {
-            axios.post('http://localhost:3000/auth/signin', { ...data })
-                .then(res => {
-                    // remove the spinner
-                    setLoggingIn(false);
-                    history.push('/loans');
-                })
-                .catch(err => {
-                    setLoggingIn(false);
-                    setDisplayFeedBackMessage(true);
-                });
-        }, 500);
-    }
+    useEffect(() => {
+        loggedIn && history.push('/loans');
+        // eslint-disable-next-line 
+    }, [loggedIn])
 
     const inputClasses = `w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-teal-500 text-base px-4 py-2`
 
@@ -52,11 +39,11 @@ const Login = () => {
             <main className="lg:w-1/3 md:w-2/5 sm:w-1/1 mx-auto pb-6">
 
                 {/* Display message after adding a loan for 3 seconds */}
-                <div className={`w-full h-8 ${displayFeedBackMessage && 'bg-red-500'} text-white text-center text-sm rounded p-2 px-8 mb-2`}>
-                    {displayFeedBackMessage && 'Oops! Log in failed, try again or Sign up'}
+                <div className={`w-full h-8 ${error && 'bg-red-500'} text-white text-center text-sm rounded p-2 px-8 mb-2`}>
+                    {error && 'Oops! Log in failed, try again or Sign up'}
                 </div>
 
-                <form className="flex flex-wrap -m-2" onSubmit={handleSubmit(onSubmit)}>
+                <form className="flex flex-wrap -m-2" onSubmit={handleSubmit(authenticate)}>
 
                     <div className="p-2 w-full">
                         <input name="email" placeholder="Email" type="text"
@@ -85,8 +72,14 @@ const Login = () => {
                 </form>
             </main>
         </Container>
-
     )
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    loggingIn: state.auth.loggingIn,
+    loggedIn: state.auth.loggedIn,
+    errorMessage: state.auth.errorMessage,
+    error: state.auth.error,
+})
+
+export default connect(mapStateToProps, { authenticate })(Login);
