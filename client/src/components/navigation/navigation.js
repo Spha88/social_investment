@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const navigation = () => {
+const navigation = ({ token }) => {
     return (
         <header className="text-gray-700">
             <div className="container mx-auto lg:px-5 bg-white mt-5 shadow-lg rounded flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -30,14 +31,27 @@ const navigation = () => {
                         className="mr-5 hover:text-gray-900" to="/support">Support</NavLink>
                 </nav>
 
-                <NavLink
-                    to="/login"
-                    className="inline-flex shadow-lg items-center bg-teal-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-teal-600 rounded text-base mt-4 md:mt-0">
-                    Login
-                </NavLink>
+                {/** if token is in localStorage display logout otherwise login */}
+                {token ?
+                    <NavLink
+                        to="/logout"
+                        className="inline-flex shadow-lg items-center bg-red-800 text-white border-0 py-1 px-3 focus:outline-none hover:bg-teal-600 rounded text-base mt-4 md:mt-0">
+                        Logout
+                    </NavLink>
+
+                    : <NavLink
+                        to="/login"
+                        className="inline-flex shadow-lg items-center bg-teal-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-teal-600 rounded text-base mt-4 md:mt-0">
+                        Login
+                    </NavLink>
+                }
             </div>
         </header>
     )
 }
 
-export default navigation
+const mapStateToProps = state => ({
+    token: state.auth.token
+})
+
+export default connect(mapStateToProps)(navigation)

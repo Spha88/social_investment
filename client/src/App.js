@@ -18,7 +18,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/loans" component={Loans} />
         <ProtectedRoute path="/apply" component={LoanApplication} />
-        <Route path="/profile" component={Profile} />
+        <ProtectedRoute path="/profile" component={Profile} />
       </Switch>
     </React.Fragment>
   );

@@ -33,6 +33,11 @@ const reducer = (state = initialState, action) => {
                 error: false,
                 errorMessage: ''
             }
+        case actionTypes.LOGOUT:
+            return {
+                ...state,
+                token: ''
+            }
         default:
             return state;
     }
