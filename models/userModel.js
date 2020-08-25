@@ -1,10 +1,52 @@
 const mongoose = require('mongoose');
+const validate = require('mongoose-validator');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
+const postalCodeValidator = [
+    validate({
+        validator: 'isLength',
+        arguments: [4, 4],
+        message: 'Postal code should be 4 digits',
+    })
+];
+
 const userSchema = new Schema({
-    email: { type: String, require: true },
+    email: { type: String, require: true, },
     password: { type: String, require: true },
+    name: { type: String },
+    surname: { type: String },
+    idNo: { type: Number },
+    cellPhone: { type: Number },
+    address: {
+        street: String,
+        city: String,
+        province: String,
+        postalCode: { type: Number, validate: postalCodeValidator }
+    },
+    employment: {
+        nameOfEmployer: String,
+        industry: String,
+        statusOfEmployment: String,
+        workContactNumber: String,
+        grossMonthlyIncome: Number,
+        netMonthlyIncome: Number,
+        frequencyOfIncome: String,
+        salaryDay: Number,
+        position: String,
+        timeAtCurrentEmployer: {
+            years: Number,
+            months: Number
+        }
+    },
+    bankingDetails: {
+        bank: String,
+        accountNumber: Number,
+        accountType: String,
+        accountHolder: String,
+    }
+
+
 });
 
 userSchema.pre('save', function (next) {

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+import Container from '../../UI/Container';
 import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
 const LoanApplication = () => {
@@ -57,13 +58,11 @@ const LoanApplication = () => {
 
     }
 
-
-
     const inputClasses = `w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-teal-500 text-base px-4 py-2`
 
     return (
 
-        <div className="container relative px-5 py-24 mx-auto bg-white mt-5 rounded shadow-xl">
+        <Container>
 
             {/** Spinner displays while making an http request to add loan */}
             {addingLoan && (
@@ -128,7 +127,7 @@ const LoanApplication = () => {
 
                 </form>
             </main>
-        </div>
+        </Container>
 
     )
 }

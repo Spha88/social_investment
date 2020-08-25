@@ -125,7 +125,7 @@ const EmployerDetails = () => {
                                 type="number"
                                 name="years-working"
                                 placeholder="Enter number of years working">
-                                <option>Number of years</option>
+                                <option value="">Number of years</option>
                                 {/** Render 'number Years' defined above */}
                                 {years}
                             </select>
@@ -135,7 +135,7 @@ const EmployerDetails = () => {
                                 type="number"
                                 name="months-working"
                                 placeholder="Enter number of months working" >
-                                <option>Number of months</option>
+                                <option value="">Number of months</option>
                                 {months}
                             </select>
                         </div>

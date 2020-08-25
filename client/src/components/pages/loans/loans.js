@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import Container from '../../UI/Container';
 import Loan from './Loan';
 import Spinner from '../../UI/Spinner/Spinner';
 
@@ -19,7 +20,7 @@ const Loans = () => {
     }, [])
 
     return (
-        <div className="container mx-auto my-10 bg-white rounded shadow-lg p-5">
+        <Container>
             <header className="pt-10">
                 <h2 className="text-4xl text-center mb-5">Loans</h2>
             </header>
@@ -34,8 +35,7 @@ const Loans = () => {
                     </div>
                 }
             </main>
-
-        </div>
+        </Container>
     )
 }
 

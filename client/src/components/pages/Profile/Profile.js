@@ -5,6 +5,7 @@ import ProfileNav from './ProfileNav';
 import Container from '../../UI/Container';
 import PersonalDetails from './PersonalDetails';
 import EmployerDetails from './EmployerDetails';
+import BankingDetails from './BankingDetails';
 
 
 const Profile = () => {
@@ -24,6 +25,7 @@ const Profile = () => {
                         </Route>
                         <Route path="/profile/personal-details" component={PersonalDetails} />
                         <Route path="/profile/employer-details" component={EmployerDetails} />
+                        <Route path="/profile/banking-details" component={BankingDetails} />
                     </Switch>
                 </main>
             </div>
