@@ -20,7 +20,10 @@ exports.getLoans = (req, res, next) => {
 
 // Create new loan
 exports.createLoan = [
-    // Make sure none of the fields are empty
+    /** 
+     * Validate none of the fields are empty
+     * and that they are numbers. 
+     */
     body('amount')
         .notEmpty().withMessage('Amount should not be empty')
         .isInt().withMessage('Amount must be an integer'),

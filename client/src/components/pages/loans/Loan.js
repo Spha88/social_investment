@@ -28,7 +28,7 @@ const Loan = ({ loan }) => {
                 .catch(err => {
                     alert("The has been an error")
                 });
-        }, 1000)
+        }, 500)
     };
 
     return (
