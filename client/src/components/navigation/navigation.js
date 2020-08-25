@@ -29,6 +29,13 @@ const navigation = ({ token }) => {
                     <NavLink
                         activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
                         className="mr-5 hover:text-gray-900" to="/support">Support</NavLink>
+
+                    {!token &&
+                        <NavLink
+                            activeClassName="text-teal-500 border-b-2 border-gray-600 inline-block"
+                            className="mr-5 hover:text-gray-900" to="/signup">Sign up</NavLink>
+                    }
+
                 </nav>
 
                 {/** if token is in localStorage display logout otherwise login */}

@@ -6,7 +6,7 @@ import survey from '../../../assets/images/questionnaire.svg';
 
 const LogoutPage = ({ logout }) => {
 
-    useEffect(() => logout(), []);
+    useEffect(() => logout(), [logout]);
 
     return (
         <Container>
@@ -15,7 +15,7 @@ const LogoutPage = ({ logout }) => {
                 <div className="h-2 bg-teal-500 w-1/5 rounded mx-auto my-5"></div>
                 <p className="text-xl">If you have a minute please give feedback, only 5 short questions</p>
                 <div className="w-1/6 mx-auto py-16">
-                    <img className="w-full" src={survey} alt="survey image" />
+                    <img className="w-full" src={survey} alt="survey form illustration" />
                 </div>
             </div>
         </Container>
