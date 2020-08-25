@@ -8,6 +8,7 @@ import LoanApplication from './components/pages/loanApplication/LoanApplication'
 import Profile from './components/pages/Profile/Profile';
 import Login from './components/pages/Login/Login';
 import Signup from './components/pages/Signup/Signup';
+import LogoutPage from './components/pages/Logout/LogoutPage';
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/loans" component={Loans} />
+        <Route path="/logout" component={LogoutPage} />
         <ProtectedRoute path="/apply" component={LoanApplication} />
         <ProtectedRoute path="/profile" component={Profile} />
+
       </Switch>
     </React.Fragment>
   );

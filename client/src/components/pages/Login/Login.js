@@ -13,7 +13,7 @@ const Login = ({ authenticate, loggingIn, loggedIn, errorMessage, error }) => {
     const history = useHistory();
 
     useEffect(() => {
-        loggedIn && history.push('/loans');
+        loggedIn && history.push('/profile');
         // eslint-disable-next-line 
     }, [loggedIn])
 
