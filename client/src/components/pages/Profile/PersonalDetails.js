@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const PersonalDetails = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const submit = data => console.log(data);
 
 
@@ -17,10 +17,12 @@ const PersonalDetails = () => {
                         <label className={labelClasses} htmlFor="name">Name</label>
                         <input
                             className={inputClasses} type="text" name="name" placeholder="Enter your name"
-                            ref={register}
+                            ref={register({
+                                required: 'Please enter your name'
+                            })}
                         />
                     </div>
-                    <div className={errorClasses}></div>
+                    <div className={errorClasses}>{errors.name && errors.name.message}</div>
                 </div>
 
                 <div className="mb-5">
@@ -28,10 +30,12 @@ const PersonalDetails = () => {
                         <label className={labelClasses} htmlFor="surname">Surname</label>
                         <input
                             className={inputClasses} type="text" name="surname" placeholder="Enter your surname"
-                            ref={register}
+                            ref={register({
+                                required: 'Please enter your Surname'
+                            })}
                         />
                     </div>
-                    <div className={errorClasses}></div>
+                    <div className={errorClasses}>{errors.surname && errors.surname.message}</div>
                 </div>
 
                 <div className="mb-5">
@@ -39,10 +43,12 @@ const PersonalDetails = () => {
                         <label className={labelClasses} htmlFor="idNumber">SA ID No.</label>
                         <input
                             className={inputClasses} type="number" name="idNumber" placeholder="ID Number"
-                            ref={register}
+                            ref={register({
+                                required: 'Please enter your SA ID. Number'
+                            })}
                         />
                     </div>
-                    <div className={errorClasses}></div>
+                    <div className={errorClasses}>{errors.idNumber && errors.idNumber.message}</div>
                 </div>
 
                 <div className="mb-5">
@@ -50,10 +56,12 @@ const PersonalDetails = () => {
                         <label className={labelClasses} htmlFor="mobileNumber">Cell Phone</label>
                         <input
                             className={inputClasses} type="tel" name="mobileNumber" placeholder="Enter your cellphone number"
-                            ref={register}
+                            ref={register({
+                                required: 'Please enter your cell or tel. number'
+                            })}
                         />
                     </div>
-                    <div className={errorClasses}></div>
+                    <div className={errorClasses}>{errors.mobileNumber && errors.mobileNumber.message}</div>
                 </div>
 
                 <div className="mb-5">
@@ -61,10 +69,12 @@ const PersonalDetails = () => {
                         <label className={labelClasses} htmlFor="email">Email</label>
                         <input
                             className={inputClasses} type="email" name="email" placeholder="Enter email address"
-                            ref={register}
+                            ref={register({
+                                required: 'Please enter your email address'
+                            })}
                         />
                     </div>
-                    <div className={errorClasses}></div>
+                    <div className={errorClasses}>{errors.email && errors.email.message}</div>
                 </div>
 
                 <div className="mb-5">
