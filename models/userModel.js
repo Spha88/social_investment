@@ -25,13 +25,13 @@ const userSchema = new Schema({
         postalCode: { type: Number, validate: postalCodeValidator }
     },
     employment: {
-        nameOfEmployer: String,
+        employerName: String,
         industry: String,
         statusOfEmployment: String,
         workContactNumber: String,
         grossMonthlyIncome: Number,
         netMonthlyIncome: Number,
-        frequencyOfIncome: String,
+        incomeFrequency: String,
         salaryDay: Number,
         position: String,
         timeAtCurrentEmployer: {
