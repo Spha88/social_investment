@@ -30,7 +30,7 @@ exports.authSignup = (req, res, next) => {
 
         // Save user
         user.save(err => {
-            if (err) { return res.status(500).json({ error: 'Could not save user' }); }
+            if (err) { return res.status(500).json({ error: 'Could not save user, try again' }); }
 
             // Saved successfully respond with JWT token
             res.status(200).json({ token: generateToken(user) });

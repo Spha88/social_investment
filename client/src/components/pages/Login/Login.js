@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
     loggingIn: state.auth.loggingIn,
     loggedIn: state.auth.loggedIn,
     errorMessage: state.auth.errorMessage,
-    error: state.auth.error,
+    error: state.auth.loginError,
 })
 
 export default connect(mapStateToProps, { authenticate })(Login);

@@ -25,6 +25,27 @@ export const authenticate = loginDetails => dispatch => {
         .catch(err => dispatch(loginFailed()));
 }
 
+export const signup = emailAndPassword => dispatch => {
+    dispatch({ type: actionTypes.SIGNING_UP });
+
+    axios.post('/auth/signup', emailAndPassword)
+        .then(res => {
+            // Save token to local storage for persistance
+            localStorage.setItem('token', res.data.token);
+
+            // complete signup successfully
+            dispatch(loggedIn(res.data.token));
+        })
+        .catch(err => {
+            if (err.response.data.error) {
+                dispatch({
+                    type: actionTypes.SIGN_UP_FAILED,
+                    payload: err.response.data.error
+                })
+            }
+        });
+}
+
 export const logout = () => dispatch => {
     localStorage.removeItem('token');
     dispatch({ type: actionTypes.LOGOUT });

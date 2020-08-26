@@ -3,9 +3,18 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     loggingIn: false,
     loggedIn: false,
-    error: false,
-    errorMessage: '',
-    token: localStorage.getItem('token')
+    loginError: false,
+
+    signingUp: false,
+    signedUp: false,
+    signUpError: false,
+    singUpErrorMessage: '',
+
+    /**
+     *  if token is in storage it is stored in this state variable
+     *  when the page loads or refreshes, this helps with persistance
+     */
+    token: localStorage.getItem('token'),
 }
 
 const reducer = (state = initialState, action) => {
@@ -20,19 +29,41 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loggingIn: false,
                 loggedIn: false,
-                error: true,
-                errorMessage: 'To be changed now',
+                loginError: true,
+                token: ''
+            }
+        case actionTypes.SIGNING_UP:
+            return {
+                ...state,
+                signingUp: true
+            }
+        case actionTypes.SIGN_UP_FAILED:
+            return {
+                ...state,
+                signingUp: false,
+                signedUp: false,
+                signUpError: true,
+                singUpErrorMessage: action.payload,
                 token: ''
             }
         case actionTypes.LOGGED_IN:
             return {
                 ...state,
+                // completes log in process
                 loggingIn: false,
                 loggedIn: true,
+                loginError: false,
+
+                // or completes signup process
+                signingUp: false,
+                signedUp: true,
+                signUpError: false,
+                singUpErrorMessage: '',
+
+                // both login and sign up request return a token on success
                 token: action.payload,
-                error: false,
-                errorMessage: ''
             }
+
         case actionTypes.LOGOUT:
             return {
                 ...state,
