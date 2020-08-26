@@ -15,7 +15,10 @@ const PersonalDetails = () => {
                 <div className="mb-5">
                     <div className={labelInputContClasses} >
                         <label className={labelClasses} htmlFor="name">Name</label>
-                        <input className={inputClasses} ref={register} type="text" name="name" placeholder="Enter your name" />
+                        <input
+                            className={inputClasses} type="text" name="name" placeholder="Enter your name"
+                            ref={register}
+                        />
                     </div>
                     <div className={errorClasses}></div>
                 </div>
@@ -23,54 +26,79 @@ const PersonalDetails = () => {
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
                         <label className={labelClasses} htmlFor="surname">Surname</label>
-                        <input className={inputClasses} type="text" name="surname" placeholder="Enter your surname" />
+                        <input
+                            className={inputClasses} type="text" name="surname" placeholder="Enter your surname"
+                            ref={register}
+                        />
                     </div>
                     <div className={errorClasses}></div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="name">SA ID No.</label>
-                        <input className={inputClasses} type="text" name="name" placeholder="ID Number" />
+                        <label className={labelClasses} htmlFor="idNumber">SA ID No.</label>
+                        <input
+                            className={inputClasses} type="number" name="idNumber" placeholder="ID Number"
+                            ref={register}
+                        />
                     </div>
                     <div className={errorClasses}></div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="name">Cell Phone</label>
-                        <input className={inputClasses} type="text" name="name" placeholder="Enter your cellphone number" />
+                        <label className={labelClasses} htmlFor="mobileNumber">Cell Phone</label>
+                        <input
+                            className={inputClasses} type="tel" name="mobileNumber" placeholder="Enter your cellphone number"
+                            ref={register}
+                        />
                     </div>
                     <div className={errorClasses}></div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="name">Email</label>
-                        <input className={inputClasses} type="email" name="email" placeholder="Enter your cellphone number" />
+                        <label className={labelClasses} htmlFor="email">Email</label>
+                        <input
+                            className={inputClasses} type="email" name="email" placeholder="Enter email address"
+                            ref={register}
+                        />
                     </div>
                     <div className={errorClasses}></div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="name">Address</label>
+                        <label className={labelClasses} htmlFor="address">Address</label>
                         <div className="w-3/4">
                             <input
                                 className={inputGroupClasses}
-                                type="email"
-                                name="email"
-                                placeholder="Enter your cellphone number" />
+                                type="text"
+                                name="street"
+                                placeholder="House No. and street name"
+                                ref={register}
+                            />
                             <input
                                 className={inputGroupClasses}
-                                type="email"
-                                name="email"
-                                placeholder="Enter your cellphone number" />
+                                type="text"
+                                name="city"
+                                placeholder="Town or City"
+                                ref={register}
+                            />
                             <input
                                 className={inputGroupClasses}
-                                type="email"
-                                name="email"
-                                placeholder="Enter your cellphone number" />
+                                type="text"
+                                name="province"
+                                placeholder="Province"
+                                ref={register}
+                            />
+                            <input
+                                className={inputGroupClasses}
+                                type="number"
+                                name="postalCode"
+                                placeholder="Postal Code"
+                                ref={register}
+                            />
                         </div>
                     </div>
                     <div className={errorClasses}></div>

@@ -17,7 +17,7 @@ const userSchema = new Schema({
     name: { type: String },
     surname: { type: String },
     idNo: { type: Number },
-    cellPhone: { type: Number },
+    mobileNumber: { type: Number },
     address: {
         street: String,
         city: String,
