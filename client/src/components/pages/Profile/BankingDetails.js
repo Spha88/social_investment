@@ -1,10 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 
-const BankingDetails = () => {
+import { updateProfile } from '../../../store/actions/index';
+
+const BankingDetails = ({ updateProfile }) => {
     const { register, handleSubmit, errors } = useForm();
-    const submit = data => console.log(data);
-
+    const submit = data => {
+        data = { bankingDetails: data };
+        updateProfile(data);
+    };
 
     return (
         <div className="px-10">
@@ -15,36 +20,36 @@ const BankingDetails = () => {
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="bankname">Bank name</label>
-                        <select className={inputClasses} type="text" name="bankname"
+                        <label className={labelClasses} htmlFor="bank">Bank name</label>
+                        <select className={inputClasses} type="text" name="bank"
                             ref={register({ required: 'Please select your bank' })}
                         >
                             <option value="">Select your bank</option>
-                            <option value="absa">Absa</option>
-                            <option value="fbb">FNB</option>
-                            <option value="stdbank">Standard Bank</option>
-                            <option value="capitec">Capitec</option>
+                            <option value="ABSA">ABSA</option>
+                            <option value="FNB">FNB</option>
+                            <option value="Standard Bank">Standard Bank</option>
+                            <option value="Capitec">Capitec</option>
                         </select>
                     </div>
-                    <div className={errorClasses}>{errors.bankname && errors.bankname.message}</div>
+                    <div className={errorClasses}>{errors.bank && errors.bank.message}</div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses} >
-                        <label className={labelClasses} htmlFor="accountnumber">Account number</label>
+                        <label className={labelClasses} htmlFor="accountNumber">Account number</label>
                         <input
-                            className={inputClasses} type="text" name="accountnumber" placeholder="Enter your employer's name"
+                            className={inputClasses} type="text" name="accountNumber" placeholder="Enter your employer's name"
                             ref={register({ required: 'Please enter your account number' })}
                         />
                     </div>
-                    <div className={errorClasses}>{errors.accountnumber && errors.accountnumber.message}</div>
+                    <div className={errorClasses}>{errors.accountNumber && errors.accountNumber.message}</div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="accounttype">Account Type</label>
+                        <label className={labelClasses} htmlFor="accountType">Account Type</label>
                         <select
-                            className={inputClasses} name="accounttype" id="accounttype"
+                            className={inputClasses} name="accountType" id="accountType"
                             ref={register({ required: 'Please select your account type.' })}
                         >
                             <option value="">Select account type</option>
@@ -54,20 +59,20 @@ const BankingDetails = () => {
                             <option value="transmission">Transmission</option>
                         </select>
                     </div>
-                    <div className={errorClasses}>{errors.accounttype && errors.accounttype.message}</div>
+                    <div className={errorClasses}>{errors.accountType && errors.accountType.message}</div>
                 </div>
 
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
-                        <label className={labelClasses} htmlFor="accountholder">Account Holder</label>
+                        <label className={labelClasses} htmlFor="accountHolder">Account Holder</label>
                         <input className={inputClasses}
                             type="text"
-                            name="accountholder"
+                            name="accountHolder"
                             placeholder="Enter account holder Name and Surname"
                             ref={register({ required: 'Enter account holder full name' })}
                         />
                     </div>
-                    <div className={errorClasses}>{errors.accountholder && errors.accountholder.message}</div>
+                    <div className={errorClasses}>{errors.accountHolder && errors.accountHolder.message}</div>
                 </div>
 
                 <footer className="text-right">
@@ -101,4 +106,4 @@ const errorClasses = `
         error text-center text-red-700 h-5
     `
 
-export default BankingDetails;
+export default connect(null, { updateProfile })(BankingDetails);
