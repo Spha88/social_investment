@@ -3,7 +3,8 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     profile: '',
     updating: false,
-    updateError: '',
+    error: '',
+    message: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,21 +13,23 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 updating: true,
-                updateError: ''
+                error: false,
+                message: ''
             }
         case actionTypes.UPDATE_SUCCESS:
-            // Stope updating, clear updateError and populate profile data
+            // Stope updating, clear message and populate profile data
             return {
                 ...state,
                 updating: false,
-                updateError: '',
+                message: 'Profile updated successfully',
                 profile: action.payload
             }
         case actionTypes.UPDATE_FAILED:
             return {
                 ...state,
                 updating: false,
-                updateError: action.payload
+                error: true,
+                message: 'Could not update profile try again later'
             }
         default:
             return state;

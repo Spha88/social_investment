@@ -8,7 +8,6 @@ export const updateProfile = formData => dispatch => {
 
     axios.put('/profile', formData)
         .then(res => {
-            console.log(res);
             dispatch({
                 type: actionTypes.UPDATE_SUCCESS,
                 payload: res.data.profile
