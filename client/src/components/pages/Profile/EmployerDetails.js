@@ -1,20 +1,26 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 
+import { updateProfile } from '../../../store/actions/index';
 import industries from './listOfIndustries';
 
-const EmployerDetails = () => {
+const EmployerDetails = ({ updateProfile }) => {
     const { register, handleSubmit, errors } = useForm();
-    const submit = data => console.log(data);
+
+    const submit = data => {
+        data = { employer: data }
+        updateProfile(data);
+    };
 
     const years = [];
     for (let i = 0; i < 61; i++) {
-        years.push(<option key={i} value={i + ' years'}>{i + ' Years'}</option>);
+        years.push(<option key={i} value={i}>{i + ' Years'}</option>);
     }
 
     const months = [];
     for (let i = 1; i < 13; i++) {
-        months.push(<option key={i} value={i + ' months'}>{i + 'Months'}</option>)
+        months.push(<option key={i} value={i}>{i + 'Months'}</option>)
     }
 
 
@@ -195,7 +201,7 @@ const EmployerDetails = () => {
                             <select
                                 className={inputGroupClasses}
                                 type="number"
-                                name="years"
+                                name="timeAtCurrentEmployer[years]"
                                 placeholder="Enter number of years working"
                                 ref={register({
                                     required: 'Please select number of years',
@@ -212,7 +218,7 @@ const EmployerDetails = () => {
                             <select
                                 className={inputGroupClasses}
                                 type="number"
-                                name="months"
+                                name="timeAtCurrentEmployer[months]"
                                 placeholder="Enter number of months working"
                                 ref={register({
                                     required: 'Select number of months',
@@ -263,4 +269,4 @@ const errorClasses = `
         error text-center text-red-700 h-5 text-sm
     `
 
-export default EmployerDetails;
+export default connect(null, { updateProfile })(EmployerDetails);

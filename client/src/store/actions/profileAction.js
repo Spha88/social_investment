@@ -4,7 +4,7 @@ import axios from '../../axios-api';
 
 
 export const updateProfile = formData => dispatch => {
-    console.log('Form data from', formData);
+    console.log('Form data from updateProfile action: ', formData);
     axios.put('/profile', formData)
         .then(res => console.log(res))
         .catch(err => console.log(err));

@@ -24,7 +24,7 @@ const userSchema = new Schema({
         province: String,
         postalCode: { type: Number, validate: postalCodeValidator }
     },
-    employment: {
+    employer: {
         employerName: String,
         industry: String,
         statusOfEmployment: String,
