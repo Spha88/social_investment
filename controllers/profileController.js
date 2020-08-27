@@ -19,6 +19,6 @@ exports.updateProfile = (req, res, next) => {
     User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
         if (err) return next(err);
         if (!user) { return json({ error: 'No user found to edit' }) };
-        res.json({ user: user });
+        res.json({ profile: user });
     })
 }
