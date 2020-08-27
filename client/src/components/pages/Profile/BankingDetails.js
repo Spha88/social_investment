@@ -44,7 +44,7 @@ const BankingDetails = () => {
                     <div className={labelInputContClasses}>
                         <label className={labelClasses} htmlFor="accounttype">Account Type</label>
                         <select
-                            className={inputClasses} ref={register} name="accounttype" id="accounttype"
+                            className={inputClasses} name="accounttype" id="accounttype"
                             ref={register({ required: 'Please select your account type.' })}
                         >
                             <option value="">Select account type</option>

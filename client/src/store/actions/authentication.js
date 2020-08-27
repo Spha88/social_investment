@@ -18,6 +18,7 @@ export const authenticate = loginDetails => dispatch => {
         .then(res => {
             // Save token to local storage for persistance
             localStorage.setItem('token', res.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
 
             // complete login successfully
             dispatch(loggedIn(res.data.token));
@@ -32,6 +33,7 @@ export const signup = emailAndPassword => dispatch => {
         .then(res => {
             // Save token to local storage for persistance
             localStorage.setItem('token', res.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
 
             // complete signup successfully
             dispatch(loggedIn(res.data.token));

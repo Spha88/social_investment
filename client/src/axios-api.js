@@ -13,10 +13,9 @@ const instance = axios.create({
     baseURL: url
 });
 
+// If there is already a token add it to instance header;
 if (authToken) {
     instance.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
-} else {
-    instance.defaults.headers.common['Authorization'] = null;
 }
 
 export default instance;

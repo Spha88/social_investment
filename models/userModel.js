@@ -16,8 +16,8 @@ const userSchema = new Schema({
     password: { type: String, require: true },
     name: { type: String },
     surname: { type: String },
-    idNo: { type: Number },
-    mobileNumber: { type: Number },
+    idNumber: { type: String },
+    mobileNumber: { type: String },
     address: {
         street: String,
         city: String,

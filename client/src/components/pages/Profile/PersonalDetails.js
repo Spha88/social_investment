@@ -1,9 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
+import { updateProfile } from '../../../store/actions/index';
 
-const PersonalDetails = () => {
+const PersonalDetails = ({ updateProfile }) => {
     const { register, handleSubmit, errors } = useForm();
-    const submit = data => console.log(data);
+    const submit = data => {
+        updateProfile(data);
+        // console.log(data)
+    };
 
 
     return (
@@ -69,14 +74,12 @@ const PersonalDetails = () => {
                         <label className={labelClasses} htmlFor="email">Email</label>
                         <input
                             className={inputClasses} type="email" name="email" placeholder="Enter email address"
-                            ref={register({
-                                required: 'Please enter your email address'
-                            })}
+                            ref={register}
                         />
                     </div>
                     <div className={errorClasses}>{errors.email && errors.email.message}</div>
                 </div>
-
+                {/** Address */}
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
                         <label className={labelClasses} htmlFor="address">Address</label>
@@ -84,28 +87,28 @@ const PersonalDetails = () => {
                             <input
                                 className={inputGroupClasses}
                                 type="text"
-                                name="street"
+                                name="address[street]"
                                 placeholder="House No. and street name"
                                 ref={register}
                             />
                             <input
                                 className={inputGroupClasses}
                                 type="text"
-                                name="city"
+                                name="address[city]"
                                 placeholder="Town or City"
                                 ref={register}
                             />
                             <input
                                 className={inputGroupClasses}
                                 type="text"
-                                name="province"
+                                name="address[province]"
                                 placeholder="Province"
                                 ref={register}
                             />
                             <input
                                 className={inputGroupClasses}
                                 type="number"
-                                name="postalCode"
+                                name="address[postalCode]"
                                 placeholder="Postal Code"
                                 ref={register}
                             />
@@ -147,4 +150,4 @@ const errorClasses = `
         error text-center text-red-700 h-5
     `
 
-export default PersonalDetails
+export default connect(null, { updateProfile })(PersonalDetails)
