@@ -44,9 +44,8 @@ const userSchema = new Schema({
         accountNumber: Number,
         accountType: String,
         accountHolder: String,
-    }
-
-
+    },
+    active: Boolean
 });
 
 userSchema.pre('save', function (next) {
