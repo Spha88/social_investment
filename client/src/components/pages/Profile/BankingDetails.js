@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
-import { updateProfile, cleanUp, fetchProfile } from '../../../store/actions/index';
+import { updateProfile, cleanUp } from '../../../store/actions/index';
 import Banks from '../../../assets/lists/banks';
 import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
@@ -31,7 +31,7 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
                     <h2 className="text-2xl mb-2 pl-5 ">Banking Details</h2>
                 </header>
 
-                <div className="h-18 mb-2 text-center">
+                <div className="h-16 mb-2 text-center">
                     {/** Message will show when updating is complete, red if updating was unsuccessful */}
                     {message &&
                         <p className={`m-0 bg-red-200 p-3 ${error ? 'bg-red-200' : 'bg-blue-200'}  block rounded`}>

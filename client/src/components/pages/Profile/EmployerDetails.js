@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 
 import { updateProfile } from '../../../store/actions/index';
 import industries from './listOfIndustries';
+import Spinner from '../../UI/Spinner/Spinner';
 
-const EmployerDetails = ({ updateProfile }) => {
+const EmployerDetails = ({ updateProfile, employer }) => {
     const { register, handleSubmit, errors } = useForm();
+
+    console.log(employer);
 
     const submit = data => {
         data = { employer: data }
@@ -20,7 +23,7 @@ const EmployerDetails = ({ updateProfile }) => {
 
     const months = [];
     for (let i = 1; i < 13; i++) {
-        months.push(<option key={i} value={i}>{i + 'Months'}</option>)
+        months.push(<option key={i} value={i}>{i + ' Months'}</option>)
     }
 
 
@@ -29,6 +32,7 @@ const EmployerDetails = ({ updateProfile }) => {
             <header>
                 <h2 className="text-2xl mb-5">Details of Employer</h2>
             </header>
+
             <form onSubmit={handleSubmit(submit)}>
 
                 {/** Name of employer */}
@@ -38,6 +42,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <input
                             className={inputClasses} type="text" name="employerName"
                             placeholder="Enter your employer's name"
+                            defaultValue={employer && employer.employerName}
                             ref={register({
                                 required: 'Please fill in name of employer'
                             })} />
@@ -53,6 +58,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="industry">Industry</label>
                         <select
                             className={inputClasses} type="text" name="industry" placeholder="Select industry"
+                            defaultValue={employer && employer.industry}
                             ref={register({
                                 required: 'Select industry'
                             })}
@@ -73,6 +79,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="statusOfEmployment">Status of Employment</label>
                         <select
                             className={inputClasses} name="statusOfEmployment"
+                            defaultValue={employer && employer.statusOfEmployment}
                             ref={register({
                                 required: 'Select employment status'
                             })}
@@ -93,6 +100,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="workContactNumber">Work Contact Number</label>
                         <input
                             className={inputClasses} type="text" name="workContactNumber" placeholder="Enter work telephone number"
+                            defaultValue={employer && employer.workContactNumber}
                             ref={register({
                                 required: 'Fill in your work contact number'
                             })}
@@ -109,6 +117,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="grossMonthlyIncome">Gross Monthly Income</label>
                         <input
                             className={inputClasses} type="number" name="grossMonthlyIncome" placeholder="Enter gross monthly income"
+                            defaultValue={employer && employer.grossMonthlyIncome}
                             ref={register({
                                 required: 'Enter your gross monthly income'
                             })}
@@ -125,6 +134,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="netMonthlyIncome">Net Monthly Income</label>
                         <input
                             className={inputClasses} type="number" name="netMonthlyIncome" placeholder="Enter your net monthly income"
+                            defaultValue={employer && employer.netMonthlyIncome}
                             ref={register({
                                 required: 'Enter your net monthly income'
                             })}
@@ -139,6 +149,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="incomeFrequency">Frequency of Income</label>
                         <select
                             className={inputClasses} type="number" name="incomeFrequency" placeholder="Select Frequency of income"
+                            defaultValue={employer && employer.incomeFrequency}
                             ref={register({
                                 required: 'Select your income frequency'
                             })}
@@ -164,6 +175,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="salaryDay">Salary Day</label>
                         <input
                             className={inputClasses} type="number" name="salaryDay" placeholder="Enter payment date of salary"
+                            defaultValue={employer && employer.salaryDay}
                             ref={register({
                                 required: 'Select your day of salary',
                                 min: { value: 1, message: 'Salary day can be from 1st to 31st of a month' },
@@ -182,6 +194,7 @@ const EmployerDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="position">Position</label>
                         <input
                             className={inputClasses} type="text" name="position" placeholder="Enter your position at work"
+                            defaultValue={employer && employer.position}
                             ref={register({
                                 required: 'Please fill in your position',
                                 maxLength: { value: 50, message: 'Position too long' }
@@ -203,6 +216,7 @@ const EmployerDetails = ({ updateProfile }) => {
                                 type="number"
                                 name="timeAtCurrentEmployer[years]"
                                 placeholder="Enter number of years working"
+                                defaultValue={employer && employer.timeAtCurrentEmployer.years}
                                 ref={register({
                                     required: 'Please select number of years',
                                     max: { value: 60, message: "Invalid value" }
@@ -220,6 +234,7 @@ const EmployerDetails = ({ updateProfile }) => {
                                 type="number"
                                 name="timeAtCurrentEmployer[months]"
                                 placeholder="Enter number of months working"
+                                defaultValue={employer && employer.timeAtCurrentEmployer.months}
                                 ref={register({
                                     required: 'Select number of months',
                                     max: { value: 12, message: "Select from 1 to 12 months" }
@@ -268,5 +283,7 @@ const inputGroupClasses = `
 const errorClasses = `
         error text-center text-red-700 h-5 text-sm
     `
-
-export default connect(null, { updateProfile })(EmployerDetails);
+const mapStateToProps = state => ({
+    employer: state.profile.profile.employer
+})
+export default connect(mapStateToProps, { updateProfile })(EmployerDetails);
