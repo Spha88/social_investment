@@ -34,9 +34,10 @@ export const fetchProfile = () => dispatch => {
             })
         })
         .catch(err => {
-            // if (err.response.data === "Unauthorized") {
-            //     dispatch({ type: actionTypes.LOGOUT })
-            // }
+            if (err.response.data === "Unauthorized") {
+                localStorage.removeItem('token');
+                dispatch({ type: actionTypes.LOGOUT })
+            }
             dispatch({
                 type: actionTypes.FETCHING_PROFILE_FAILED,
                 payload: err.response.data.error

@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
 import { updateProfile, cleanUp, fetchProfile } from '../../../store/actions/index';
+import Banks from '../../../assets/lists/banks';
+import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
 const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bankingDetails }) => {
 
@@ -13,19 +15,14 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
         updateProfile(data);
     };
 
-
-
     console.log('banking details', bankingDetails);
 
 
     useEffect(() => {
-        fetchProfile();
 
         return cleanUp();
         // eslint-disable-next-line
     }, [])
-
-    // user managed to get here while not logged in
 
     return (
         <div className="px-10 relative">
@@ -33,31 +30,41 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
                 <header>
                     <h2 className="text-2xl mb-2 pl-5 ">Banking Details</h2>
                 </header>
+
                 <div className="h-18 mb-2 text-center">
+                    {/** Message will show when updating is complete, red if updating was unsuccessful */}
                     {message &&
                         <p className={`m-0 bg-red-200 p-3 ${error ? 'bg-red-200' : 'bg-blue-200'}  block rounded`}>
                             {message}
                         </p>
                     }
+
+                    {/** This spinner will show while updating */}
+                    {updating && <SpinnerSmall />}
                 </div>
+
                 <form onSubmit={handleSubmit(submit)}>
 
+                    {/** Bank name input */}
                     <div className="mb-5">
                         <div className={labelInputContClasses}>
                             <label className={labelClasses} htmlFor="bank">Bank name</label>
                             <select className={inputClasses} type="text" name="bank" autoComplete="off"
+                                defaultValue={bankingDetails && bankingDetails.bank}
                                 ref={register({ required: 'Please select your bank' })}
                             >
                                 <option value="">Select your bank</option>
-                                <option value="ABSA">ABSA</option>
-                                <option value="FNB">FNB</option>
-                                <option value="Standard Bank">Standard Bank</option>
-                                <option value="Capitec">Capitec</option>
+                                {Banks.map(bank => (
+                                    <option key={bank.name} value={bank.name}>
+                                        {bank.description}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className={errorClasses}>{errors.bank && errors.bank.message}</div>
                     </div>
 
+                    {/** Account Number input */}
                     <div className="mb-5">
                         <div className={labelInputContClasses} >
                             <label className={labelClasses} htmlFor="accountNumber">Account number</label>
@@ -71,11 +78,13 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
                         <div className={errorClasses}>{errors.accountNumber && errors.accountNumber.message}</div>
                     </div>
 
+                    {/** Account type input */}
                     <div className="mb-5">
                         <div className={labelInputContClasses}>
                             <label className={labelClasses} htmlFor="accountType">Account Type</label>
                             <select
                                 className={inputClasses} autoComplete="off" name="accountType" id="accountType"
+                                defaultValue={bankingDetails && bankingDetails.accountType}
                                 ref={register({ required: 'Please select your account type.' })}
                             >
                                 <option value="">Select account type</option>
@@ -88,6 +97,7 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
                         <div className={errorClasses}>{errors.accountType && errors.accountType.message}</div>
                     </div>
 
+                    {/** Account Holder name input */}
                     <div className="mb-5">
                         <div className={labelInputContClasses}>
                             <label className={labelClasses} htmlFor="accountHolder">Account Holder</label>
@@ -110,7 +120,7 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
                     </footer>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 const labelInputContClasses = `
@@ -141,4 +151,4 @@ const mapStateToProps = state => ({
     bankingDetails: state.profile.profile.bankingDetails
 })
 
-export default connect(mapStateToProps, { updateProfile, cleanUp, fetchProfile })(BankingDetails);
+export default connect(mapStateToProps, { updateProfile, cleanUp })(BankingDetails);

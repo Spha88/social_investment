@@ -13,8 +13,6 @@ import { fetchProfile } from '../../../store/actions/profileAction';
 const Profile = ({ fetchProfile }) => {
 
     useEffect(() => {
-        console.log('fetching profile');
-
         fetchProfile();
         // eslint-disable-next-line
     }, [])

@@ -57,7 +57,6 @@ export const logout = () => dispatch => {
 // this is called every time app renders
 export const checkLoggedIn = () => async dispatch => {
     const token = await localStorage.getItem('token');
-    console.log(token);
     if (token) {
         dispatch(loggedIn(token));
     } else {
