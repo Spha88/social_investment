@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { updateProfile } from '../../../store/actions/index';
 
-const PersonalDetails = ({ updateProfile }) => {
+const PersonalDetails = ({ updateProfile, profile }) => {
     const { register, handleSubmit, errors } = useForm();
     const submit = data => {
         updateProfile(data);
@@ -22,6 +22,7 @@ const PersonalDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="name">Name</label>
                         <input
                             className={inputClasses} type="text" name="name" placeholder="Enter your name"
+                            defaultValue={profile && profile.name}
                             ref={register({
                                 required: 'Please enter your name'
                             })}
@@ -35,6 +36,7 @@ const PersonalDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="surname">Surname</label>
                         <input
                             className={inputClasses} type="text" name="surname" placeholder="Enter your surname"
+                            defaultValue={profile && profile.surname}
                             ref={register({
                                 required: 'Please enter your Surname'
                             })}
@@ -48,6 +50,7 @@ const PersonalDetails = ({ updateProfile }) => {
                         <label className={labelClasses} htmlFor="idNumber">SA ID No.</label>
                         <input
                             className={inputClasses} type="number" name="idNumber" placeholder="ID Number"
+                            defaultValue={profile && profile.idNumber}
                             ref={register({
                                 required: 'Please enter your SA ID. Number'
                             })}
@@ -56,11 +59,13 @@ const PersonalDetails = ({ updateProfile }) => {
                     <div className={errorClasses}>{errors.idNumber && errors.idNumber.message}</div>
                 </div>
 
+                {/** Cellphone Number */}
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
                         <label className={labelClasses} htmlFor="mobileNumber">Cell Phone</label>
                         <input
                             className={inputClasses} type="tel" name="mobileNumber" placeholder="Enter your cellphone number"
+                            defaultValue={profile && profile.mobileNumber}
                             ref={register({
                                 required: 'Please enter your cell or tel. number'
                             })}
@@ -69,16 +74,19 @@ const PersonalDetails = ({ updateProfile }) => {
                     <div className={errorClasses}>{errors.mobileNumber && errors.mobileNumber.message}</div>
                 </div>
 
+                {/** Email  */}
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
                         <label className={labelClasses} htmlFor="email">Email</label>
                         <input
                             className={inputClasses} type="email" name="email" placeholder="Enter email address"
+                            defaultValue={profile && profile.email}
                             ref={register}
                         />
                     </div>
                     <div className={errorClasses}>{errors.email && errors.email.message}</div>
                 </div>
+
                 {/** Address */}
                 <div className="mb-5">
                     <div className={labelInputContClasses}>
@@ -89,6 +97,7 @@ const PersonalDetails = ({ updateProfile }) => {
                                 type="text"
                                 name="address[street]"
                                 placeholder="House No. and street name"
+                                defaultValue={profile && profile.address.street}
                                 ref={register}
                             />
                             <input
@@ -96,6 +105,7 @@ const PersonalDetails = ({ updateProfile }) => {
                                 type="text"
                                 name="address[city]"
                                 placeholder="Town or City"
+                                defaultValue={profile && profile.address.city}
                                 ref={register}
                             />
                             <input
@@ -103,6 +113,7 @@ const PersonalDetails = ({ updateProfile }) => {
                                 type="text"
                                 name="address[province]"
                                 placeholder="Province"
+                                defaultValue={profile && profile.address.province}
                                 ref={register}
                             />
                             <input
@@ -110,6 +121,7 @@ const PersonalDetails = ({ updateProfile }) => {
                                 type="number"
                                 name="address[postalCode]"
                                 placeholder="Postal Code"
+                                defaultValue={profile && profile.address.postalCode}
                                 ref={register}
                             />
                         </div>
@@ -149,5 +161,8 @@ const inputGroupClasses = `
 const errorClasses = `
         error text-center text-red-700 h-5
     `
+const mapStateToProps = state => ({
+    profile: state.profile.profile
+})
 
-export default connect(null, { updateProfile })(PersonalDetails)
+export default connect(mapStateToProps, { updateProfile })(PersonalDetails)
