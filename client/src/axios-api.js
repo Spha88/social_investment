@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let url;
-let authToken = localStorage.getItem('myJwt');
+let authToken = localStorage.getItem('token');
 
 if (process.env.NODE_ENV === 'production') {
     url = process.env.REACT_APP_API_BASE_URL;

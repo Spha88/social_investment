@@ -28,7 +28,8 @@ router.post('/signup', authController.authSignup);
 
 router.post('/signin', SignIn, authController.authSignin);
 
-router.get('/data', requireAuth, (req, res) => {
+// Route to check if token is still valid
+router.get('/token', requireAuth, (req, res) => {
     res.send('This is a protected route');
 })
 

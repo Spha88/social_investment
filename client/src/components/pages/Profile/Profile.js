@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import ProfileNav from './ProfileNav';
 import Container from '../../UI/Container';
 import PersonalDetails from './PersonalDetails';
 import EmployerDetails from './EmployerDetails';
 import BankingDetails from './BankingDetails';
+import { fetchProfile } from '../../../store/actions/profileAction';
 
 
-const Profile = () => {
+const Profile = ({ fetchProfile }) => {
+
+    useEffect(() => {
+        console.log('fetching profile');
+
+        fetchProfile();
+        // eslint-disable-next-line
+    }, [])
+
     return (
         <Container>
             <header className="p-5 text-center mb-5">
@@ -33,4 +43,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default connect(null, { fetchProfile })(Profile)

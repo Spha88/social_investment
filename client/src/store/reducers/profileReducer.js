@@ -3,12 +3,20 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     profile: '',
     updating: false,
-    error: '',
-    message: ''
+    error: false,
+    message: '',
+
+    fetchingProfile: false,
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.CLEAN_UP:
+            return {
+                ...state,
+                message: '',
+                error: false
+            }
         case actionTypes.UPDATING:
             return {
                 ...state,
@@ -30,6 +38,23 @@ const reducer = (state = initialState, action) => {
                 updating: false,
                 error: true,
                 message: 'Could not update profile try again later'
+            }
+        case actionTypes.FETCHING_PROFILE:
+            return {
+                ...state,
+                fetchingProfile: true,
+            }
+        case actionTypes.FETCHING_PROFILE_SUCCESS:
+            return {
+                ...state,
+                fetchingProfile: false,
+                profile: action.payload
+            }
+        case actionTypes.FETCHING_PROFILE_FAILED:
+            return {
+                ...state,
+                fetchingProfile: false,
+                profile: '',
             }
         default:
             return state;

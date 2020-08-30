@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
+
+import { checkLoggedIn } from './store/actions/authentication';
 
 import Navigation from './components/navigation/navigation';
 import Loans from './components/pages/loans/Loans';
@@ -10,7 +13,13 @@ import Login from './components/pages/Login/Login';
 import Signup from './components/pages/Signup/Signup';
 import LogoutPage from './components/pages/Logout/LogoutPage';
 
-function App() {
+function App({ checkLoggedIn }) {
+
+  useEffect(() => {
+    checkLoggedIn();
+    // eslint-disable-next-line 
+  }, []);
+
   return (
     <React.Fragment>
       <Navigation />
@@ -27,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { checkLoggedIn })(App);

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
-import { updateProfile } from '../../../store/actions/index';
-import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
+import { updateProfile, cleanUp, fetchProfile } from '../../../store/actions/index';
 
-const BankingDetails = ({ updateProfile, updating, error, message, bankingDetails }) => {
+const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bankingDetails }) => {
 
     const { register, handleSubmit, errors } = useForm();
 
@@ -13,6 +12,18 @@ const BankingDetails = ({ updateProfile, updating, error, message, bankingDetail
         data = { bankingDetails: data };
         updateProfile(data);
     };
+
+
+
+    console.log('banking details', bankingDetails);
+
+
+    useEffect(() => {
+        fetchProfile();
+
+        return cleanUp();
+        // eslint-disable-next-line
+    }, [])
 
     // user managed to get here while not logged in
 
@@ -51,7 +62,9 @@ const BankingDetails = ({ updateProfile, updating, error, message, bankingDetail
                         <div className={labelInputContClasses} >
                             <label className={labelClasses} htmlFor="accountNumber">Account number</label>
                             <input
-                                className={inputClasses} autoComplete="off" type="text" name="accountNumber" placeholder="Enter your employer's name"
+                                className={inputClasses}
+                                autoComplete="off" type="text" name="accountNumber" placeholder="Enter your employer's name"
+                                defaultValue={bankingDetails && bankingDetails.accountNumber}
                                 ref={register({ required: 'Please enter your account number' })}
                             />
                         </div>
@@ -83,6 +96,7 @@ const BankingDetails = ({ updateProfile, updating, error, message, bankingDetail
                                 type="text"
                                 name="accountHolder"
                                 placeholder="Enter account holder Name and Surname"
+                                defaultValue={bankingDetails && bankingDetails.accountHolder}
                                 ref={register({ required: 'Enter account holder full name' })}
                             />
                         </div>
@@ -127,4 +141,4 @@ const mapStateToProps = state => ({
     bankingDetails: state.profile.profile.bankingDetails
 })
 
-export default connect(mapStateToProps, { updateProfile })(BankingDetails);
+export default connect(mapStateToProps, { updateProfile, cleanUp, fetchProfile })(BankingDetails);

@@ -6,7 +6,11 @@ const User = require('../models/userModel');
 const { json } = require('express');
 
 exports.getProfile = (req, res, next) => {
-    res.send('NYI: Profile index route this will respond with the profile')
+    User.findById(req.user._id, (err, user) => {
+        if (err) { return res.json({ error: 'Error fetching user data' }) };
+        if (!user) { return res.json({ error: 'User does not exist' }) }
+        res.json({ user: user });
+    })
 }
 
 exports.getEditProfile = (req, res, next) => {

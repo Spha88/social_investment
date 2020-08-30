@@ -52,3 +52,15 @@ export const logout = () => dispatch => {
     localStorage.removeItem('token');
     dispatch({ type: actionTypes.LOGOUT });
 }
+
+// checks if there is a token and if not logs out else logs in
+// this is called every time app renders
+export const checkLoggedIn = () => async dispatch => {
+    const token = await localStorage.getItem('token');
+    console.log(token);
+    if (token) {
+        dispatch(loggedIn(token));
+    } else {
+        dispatch({ type: actionTypes.LOGOUT });
+    }
+}
