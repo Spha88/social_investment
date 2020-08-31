@@ -28,7 +28,7 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
         <div className="px-10 relative">
             <div className="z-40">
                 <header>
-                    <h2 className="text-2xl mb-2 pl-5 ">Banking Details</h2>
+                    <h2 className="text-2xl mb-1 pl-5 ">Banking Details</h2>
                 </header>
 
                 {/** Display spinner when updating and update message when done */}

@@ -15,7 +15,7 @@ const PersonalDetails = ({ updateProfile, profile, cleanUp, updating, error, mes
     return (
         <div className="px-10">
             <header>
-                <h2 className="text-2xl mb-5">Personal Details</h2>
+                <h2 className="text-2xl mb-1">Personal Details</h2>
             </header>
 
             {/** Display spinner when updating and update message when done */}
