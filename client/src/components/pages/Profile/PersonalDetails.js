@@ -1,9 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { updateProfile } from '../../../store/actions/index';
+import { updateProfile, cleanUp } from '../../../store/actions/index';
+import UpdateMessage from '../../UI/UpdateMessage/UpdateMessage';
 
-const PersonalDetails = ({ updateProfile, profile }) => {
+const PersonalDetails = ({ updateProfile, profile, cleanUp, updating, error, message }) => {
     const { register, handleSubmit, errors } = useForm();
     const submit = data => {
         updateProfile(data);
@@ -16,6 +17,10 @@ const PersonalDetails = ({ updateProfile, profile }) => {
             <header>
                 <h2 className="text-2xl mb-5">Personal Details</h2>
             </header>
+
+            {/** Display spinner when updating and update message when done */}
+            <UpdateMessage message={message} updating={updating} error={error} />
+
             <form onSubmit={handleSubmit(submit)}>
                 <div className="mb-5">
                     <div className={labelInputContClasses} >
@@ -162,7 +167,10 @@ const errorClasses = `
         error text-center text-red-700 h-5
     `
 const mapStateToProps = state => ({
+    error: state.profile.error,
+    message: state.profile.message,
+    updating: state.profile.updating,
     profile: state.profile.profile
 })
 
-export default connect(mapStateToProps, { updateProfile })(PersonalDetails)
+export default connect(mapStateToProps, { updateProfile, cleanUp })(PersonalDetails)

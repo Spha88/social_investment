@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
-import { updateProfile } from '../../../store/actions/index';
+import { updateProfile, cleanUp } from '../../../store/actions/index';
 import industries from '../../../assets/lists/listOfIndustries';
 import UpdateMessage from '../../UI/UpdateMessage/UpdateMessage';
 
-const EmployerDetails = ({ updateProfile, employer, error, message, updating }) => {
+const EmployerDetails = ({ updateProfile, cleanUp, employer, error, message, updating }) => {
     const { register, handleSubmit, errors } = useForm();
+
+    useEffect(() => {
+
+        return cleanUp();
+        // eslint-disable-next-line
+    }, [])
 
     const submit = data => {
         data = { employer: data }
@@ -290,4 +296,4 @@ const mapStateToProps = state => ({
     message: state.profile.message,
     updating: state.profile.updating
 })
-export default connect(mapStateToProps, { updateProfile })(EmployerDetails);
+export default connect(mapStateToProps, { updateProfile, cleanUp })(EmployerDetails);
