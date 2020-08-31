@@ -10,12 +10,12 @@ const Summary = ({ profile }) => {
             <header className="mb-5">
                 <h2 className="text-2xl mb-1 pl-10">Summary</h2>
             </header>
-            <div className="border rounded px-3 py-10 shadow-xl bg-blue-100 text-center">
+            <div className="border rounded px-3 py-10 bg-blue-100 text-center">
                 <h2 className="text-2xl font-light">
                     According to your credit score you can borrow R5000
                     <br />
                     <Link to="/apply"
-                        className="bg-teal-500 rounded text-white px-8 py-1 mt-5 inline-block text-xl">
+                        className="bg-teal-500 rounded text-white px-8 py-1 mt-5 inline-block text-xl hover:bg-teal-800">
                         Apply Now</Link>
                 </h2>
             </div>
@@ -58,6 +58,13 @@ const Summary = ({ profile }) => {
                                 </div>
                             </li>
                         </ul>
+                        <div className="text-right">
+                            <Link
+                                to="/profile/personal-details"
+                                className="rounded bg-teal-500 px-5 py-1 text-white hover:bg-teal-800">
+                                Edit
+                            </Link>
+                        </div>
                     </div >
 
                     <div className="border rounded p-10 pb-5 mt-5">
@@ -114,6 +121,13 @@ const Summary = ({ profile }) => {
                                 </div>
                             </li>
                         </ul>
+                        <div className="text-right">
+                            <Link
+                                to="/profile/employer-details"
+                                className="rounded bg-teal-500 px-5 py-1 text-white hover:bg-teal-800">
+                                Edit
+                            </Link>
+                        </div>
                     </div >
 
                     <div className="border rounded p-10 pb-5 mt-5">
@@ -135,6 +149,13 @@ const Summary = ({ profile }) => {
                                 </div>
                             </li>
                         </ul>
+                        <div className="text-right">
+                            <Link
+                                to="/profile/banking-details"
+                                className="rounded bg-teal-500 px-5 py-1 text-white hover:bg-teal-800">
+                                Edit
+                            </Link>
+                        </div>
                     </div >
                 </div >
 
