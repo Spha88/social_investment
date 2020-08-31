@@ -15,9 +15,6 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
         updateProfile(data);
     };
 
-    console.log('banking details', bankingDetails);
-
-
     useEffect(() => {
 
         return cleanUp();
@@ -25,7 +22,7 @@ const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bank
     }, [])
 
     return (
-        <div className="px-10 relative">
+        <div>
             <div className="z-40">
                 <header>
                     <h2 className="text-2xl mb-1 pl-5 ">Banking Details</h2>

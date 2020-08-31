@@ -13,7 +13,7 @@ const PersonalDetails = ({ updateProfile, profile, cleanUp, updating, error, mes
 
 
     return (
-        <div className="px-10">
+        <div>
             <header>
                 <h2 className="text-2xl mb-1">Personal Details</h2>
             </header>

@@ -9,7 +9,7 @@ const ProfileNav = () => {
                     className={navLinkClasses}
                     activeClassName={activeClassName}
                     exact
-                    to="/profile">Summary
+                    to="/profile">Profile
                 </NavLink>
             </li>
             <li>

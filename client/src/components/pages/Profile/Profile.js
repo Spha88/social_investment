@@ -24,10 +24,10 @@ const Profile = ({ fetchProfile }) => {
                 <h1 className="text-center text-3xl">Profile</h1>
             </header>
             <div className="flex pb-10">
-                <aside className="md:w-1/4 border-r border-teal-500 px-5">
+                <aside className="md:w-1/4 border-r border-teal-500 p-10 pt-0">
                     <ProfileNav />
                 </aside>
-                <main className="w-3/4 p-5 p-1">
+                <main className="w-3/4 pt-0 p-10">
                     <Switch>
                         <Route exact path="/profile" component={Summary} />
                         <Route path="/profile/personal-details" component={PersonalDetails} />

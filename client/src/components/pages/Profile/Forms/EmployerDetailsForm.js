@@ -32,7 +32,7 @@ const EmployerDetails = ({ updateProfile, cleanUp, employer, error, message, upd
 
 
     return (
-        <div className="px-10">
+        <div>
             <header>
                 <h2 className="text-2xl mb-1">Details of Employer</h2>
             </header>

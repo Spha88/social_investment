@@ -10,10 +10,7 @@ import BankingDetails from './ProfileSections/BankingDetails';
 const Summary = ({ profile }) => {
 
     return (
-        <div className="px-10">
-            <header className="mb-5">
-                <h2 className="text-2xl mb-1 pl-10">Summary</h2>
-            </header>
+        <div className="pt-0">
             <div className="border rounded px-3 py-10 bg-blue-100 text-center">
                 <h2 className="text-2xl font-light">
                     According to your credit score you can borrow R5000
@@ -24,21 +21,19 @@ const Summary = ({ profile }) => {
                 </h2>
             </div>
 
-
-            {profile ? (
-
-                <div className="mt-10">
-                    <PersonalDetails profile={profile} />
-                    <EmployerDetails profile={profile} />
-                    <BankingDetails profile={profile} />
-                </div >
-
-            ) : (
+            {profile ?
+                (
+                    <div className="mt-10">
+                        <PersonalDetails profile={profile} />
+                        <EmployerDetails profile={profile} />
+                        <BankingDetails profile={profile} />
+                    </div >
+                )
+                : (
                     <div className="p-10">
                         <SpinnerSmall />
                     </div>
                 )
-
             }
 
         </div >
