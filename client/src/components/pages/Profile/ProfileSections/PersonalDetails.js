@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ProfileEditBtn from '../../../UI/ProfileEditBtn/ProfileEditBtn';
 
 const PersonalDetails = ({ profile }) => {
     return (
@@ -39,11 +39,7 @@ const PersonalDetails = ({ profile }) => {
                 </li>
             </ul>
             <div className="text-right">
-                <Link
-                    to="/profile/personal-details"
-                    className="rounded bg-teal-500 px-5 py-1 text-white hover:bg-teal-800">
-                    Edit
-                            </Link>
+                <ProfileEditBtn to="/profile/personal-details" />
             </div>
         </div >
     )
