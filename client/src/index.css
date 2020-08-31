@@ -6,3 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+* {
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}

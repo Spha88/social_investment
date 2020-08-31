@@ -3,13 +3,10 @@ import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
 import { updateProfile } from '../../../store/actions/index';
-import industries from './listOfIndustries';
-import Spinner from '../../UI/Spinner/Spinner';
+import industries from '../../../assets/lists/listOfIndustries';
 
 const EmployerDetails = ({ updateProfile, employer }) => {
     const { register, handleSubmit, errors } = useForm();
-
-    console.log(employer);
 
     const submit = data => {
         data = { employer: data }

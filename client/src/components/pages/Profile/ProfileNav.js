@@ -31,7 +31,7 @@ const ProfileNav = () => {
     )
 }
 
-const activeClassName = ` bg-teal-500 `
+const activeClassName = ` bg-teal-500 text-white hover:bg-teal-500`
 
 const navLinkClasses = `hover:bg-gray-200 py-3 px-5 rounded block mb-2`
 

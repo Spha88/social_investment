@@ -8,19 +8,25 @@ export const cleanUp = () => dispatch => {
 export const updateProfile = formData => dispatch => {
     dispatch({ type: actionTypes.UPDATING });
 
-    axios.put('/profile', formData)
-        .then(res => {
-            dispatch({
-                type: actionTypes.UPDATE_SUCCESS,
-                payload: res.data.profile
+    setTimeout(() => {
+        axios.put('/profile', formData)
+            .then(res => {
+                dispatch({
+                    type: actionTypes.UPDATE_SUCCESS,
+                    payload: res.data.profile
+                })
             })
-        })
-        .catch(err => {
-            dispatch({
-                type: actionTypes.UPDATE_FAILED,
-                payload: err.response.data.error
+            .catch(err => {
+                if (err.response.data === "Unauthorized") {
+                    localStorage.removeItem('token');
+                    dispatch({ type: actionTypes.LOGOUT })
+                }
+                dispatch({
+                    type: actionTypes.UPDATE_FAILED,
+                    payload: err.response.data.error
+                })
             })
-        })
+    }, 500)
 }
 
 export const fetchProfile = () => dispatch => {
