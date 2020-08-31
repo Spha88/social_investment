@@ -11,7 +11,7 @@ const Summary = ({ profile }) => {
 
     return (
         <div className="pt-0">
-            <div className="border rounded px-3 py-10 bg-blue-100 text-center">
+            <header className="border rounded px-3 py-10 bg-blue-100 text-center">
                 <h2 className="text-2xl font-light">
                     According to your credit score you can borrow R5000
                     <br />
@@ -19,11 +19,11 @@ const Summary = ({ profile }) => {
                         className="bg-teal-500 rounded text-white px-8 py-1 mt-5 inline-block text-xl hover:bg-teal-800">
                         Apply Now</Link>
                 </h2>
-            </div>
+            </header>
 
             {profile ?
                 (
-                    <div className="mt-10">
+                    <div className="mt-5">
                         <PersonalDetails profile={profile} />
                         <EmployerDetails profile={profile} />
                         <BankingDetails profile={profile} />
