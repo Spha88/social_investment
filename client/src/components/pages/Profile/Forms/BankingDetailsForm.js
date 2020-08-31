@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
-import { updateProfile, cleanUp } from '../../../store/actions/index';
-import Banks from '../../../assets/lists/banks';
-import UpdateMessage from '../../UI/UpdateMessage/UpdateMessage';
+import { updateProfile, cleanUp } from '../../../../store/actions/index';
+import Banks from '../../../../assets/lists/banks';
+import UpdateMessage from '../../../UI/UpdateMessage/UpdateMessage';
 
 const BankingDetails = ({ updateProfile, cleanUp, updating, error, message, bankingDetails }) => {
 

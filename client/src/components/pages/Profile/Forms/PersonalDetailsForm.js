@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { updateProfile, cleanUp } from '../../../store/actions/index';
-import UpdateMessage from '../../UI/UpdateMessage/UpdateMessage';
+import { updateProfile, cleanUp } from '../../../../store/actions/index';
+import UpdateMessage from '../../../UI/UpdateMessage/UpdateMessage';
 
 const PersonalDetails = ({ updateProfile, profile, cleanUp, updating, error, message }) => {
     const { register, handleSubmit, errors } = useForm();

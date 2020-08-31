@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
-import { updateProfile, cleanUp } from '../../../store/actions/index';
-import industries from '../../../assets/lists/listOfIndustries';
-import UpdateMessage from '../../UI/UpdateMessage/UpdateMessage';
+import { updateProfile, cleanUp } from '../../../../store/actions/index';
+import industries from '../../../../assets/lists/listOfIndustries';
+import UpdateMessage from '../../../UI/UpdateMessage/UpdateMessage';
 
 const EmployerDetails = ({ updateProfile, cleanUp, employer, error, message, updating }) => {
     const { register, handleSubmit, errors } = useForm();

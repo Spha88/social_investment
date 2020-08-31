@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import ProfileNav from './ProfileNav';
 import Container from '../../UI/Container';
-import PersonalDetails from './PersonalDetails';
-import EmployerDetails from './EmployerDetails';
-import BankingDetails from './BankingDetails';
+import PersonalDetails from './Forms/PersonalDetailsForm';
+import EmployerDetails from './Forms/EmployerDetailsForm';
+import BankingDetails from './Forms/BankingDetailsForm';
 import { fetchProfile } from '../../../store/actions/profileAction';
 import Summary from './Summary';
 
