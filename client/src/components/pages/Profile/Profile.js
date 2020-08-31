@@ -8,6 +8,7 @@ import PersonalDetails from './PersonalDetails';
 import EmployerDetails from './EmployerDetails';
 import BankingDetails from './BankingDetails';
 import { fetchProfile } from '../../../store/actions/profileAction';
+import Summary from './Summary';
 
 
 const Profile = ({ fetchProfile }) => {
@@ -28,9 +29,7 @@ const Profile = ({ fetchProfile }) => {
                 </aside>
                 <main className="w-3/4 p-5 p-1">
                     <Switch>
-                        <Route exact path="/profile">
-                            <h2>This will show the landing page, not yet implemented</h2>
-                        </Route>
+                        <Route exact path="/profile" component={Summary} />
                         <Route path="/profile/personal-details" component={PersonalDetails} />
                         <Route path="/profile/employer-details" component={EmployerDetails} />
                         <Route path="/profile/banking-details" component={BankingDetails} />

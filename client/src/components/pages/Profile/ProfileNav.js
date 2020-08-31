@@ -8,6 +8,14 @@ const ProfileNav = () => {
                 <NavLink
                     className={navLinkClasses}
                     activeClassName={activeClassName}
+                    exact
+                    to="/profile">Summary
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={navLinkClasses}
+                    activeClassName={activeClassName}
                     to="/profile/personal-details">Personal Details
                 </NavLink>
             </li>
