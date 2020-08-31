@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import { updateProfile } from '../../../store/actions/index';
 import industries from '../../../assets/lists/listOfIndustries';
+import UpdateMessage from '../../UI/UpdateMessage/UpdateMessage';
 
-const EmployerDetails = ({ updateProfile, employer }) => {
+const EmployerDetails = ({ updateProfile, employer, error, message, updating }) => {
     const { register, handleSubmit, errors } = useForm();
 
     const submit = data => {
@@ -29,6 +30,9 @@ const EmployerDetails = ({ updateProfile, employer }) => {
             <header>
                 <h2 className="text-2xl mb-5">Details of Employer</h2>
             </header>
+
+            {/** Display spinner when updating and update message when done */}
+            <UpdateMessage message={message} error={error} updating={updating} />
 
             <form onSubmit={handleSubmit(submit)}>
 
@@ -281,6 +285,9 @@ const errorClasses = `
         error text-center text-red-700 h-5 text-sm
     `
 const mapStateToProps = state => ({
-    employer: state.profile.profile.employer
+    employer: state.profile.profile.employer,
+    error: state.profile.error,
+    message: state.profile.message,
+    updating: state.profile.updating
 })
 export default connect(mapStateToProps, { updateProfile })(EmployerDetails);
