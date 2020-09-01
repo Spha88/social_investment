@@ -27,7 +27,7 @@ const Profile = ({ fetchProfile }) => {
                 <aside className="md:w-1/4 border-r border-teal-500 p-10 pt-0">
                     <ProfileNav />
                 </aside>
-                <main className="w-3/4 pt-0 p-10">
+                <main className="w-3/4 pt-0 pb-0 p-10">
                     <Switch>
                         <Route exact path="/profile" component={Summary} />
                         <Route path="/profile/personal-details" component={PersonalDetails} />

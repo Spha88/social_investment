@@ -12,7 +12,7 @@ const EmployerDetails = ({ profile }) => {
         <div className="border rounded mt-5">
 
             <header onClick={openDetails}
-                className="flex justify-between cursor-pointer px-10 py-5 hover:bg-blue-100">
+                className="flex justify-between cursor-pointer px-10 py-5 hover:bg-blue-100 border-b">
                 <h3 className="text-2xl font-light">
                     Employer Details
                 </h3>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const DropDownToggle = ({ open, click }) => {
     return (
-        <div onClick={() => click()} className="cursor-pointer inline">
+        <div onClick={() => click()} className="cursor-pointer inline flex items-center">
             {!open ?
                 (
                     <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
