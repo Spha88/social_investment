@@ -12,6 +12,7 @@ import Profile from './components/pages/Profile/Profile';
 import Login from './components/pages/Login/Login';
 import Signup from './components/pages/Signup/Signup';
 import LogoutPage from './components/pages/Logout/LogoutPage';
+import LoanApplicationSlide from './components/pages/loanApplication/LoanApplicationSlide';
 
 function App({ checkLoggedIn }) {
 
@@ -29,6 +30,7 @@ function App({ checkLoggedIn }) {
         <Route path="/loans" component={Loans} />
         <Route path="/logout" component={LogoutPage} />
         <ProtectedRoute path="/apply" component={LoanApplication} />
+        <ProtectedRoute path="/apply-slide" component={LoanApplicationSlide} />
         <ProtectedRoute path="/profile" component={Profile} />
 
       </Switch>

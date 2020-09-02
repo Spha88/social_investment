@@ -18,7 +18,7 @@ const BankingDetails = ({ profile }) => {
                 <DropDownToggle open={open} click={openDetails} />
             </header>
 
-            <div className={`${!open ? 'hidden' : 'block'} px-10 py-5`} >
+            <main className={`${!open ? 'hidden' : 'block'} px-10 py-5`} >
                 <ul className="text-xl divide-y divide-gray-400">
                     <li className="flex flex-wrap items-stretch mb-3">
                         <div className="w-1/2">
@@ -35,11 +35,11 @@ const BankingDetails = ({ profile }) => {
                         </div>
                     </li>
                 </ul>
-                <div className="text-right">
+                <div className="flex justify-end">
                     <ProfileEditBtn to="profile/banking-details" />
                 </div>
-            </div>
-        </div >
+            </main>
+        </div>
     )
 }
 

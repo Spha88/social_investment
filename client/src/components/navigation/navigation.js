@@ -25,6 +25,9 @@ const navigation = ({ token }) => {
                         className={navItemClasses} to="/apply">Get a loan</NavLink>
                     <NavLink
                         activeClassName={active}
+                        className={navItemClasses} to="/apply-slide">Apply Now</NavLink>
+                    <NavLink
+                        activeClassName={active}
                         className={navItemClasses} to="/profile">Profile</NavLink>
                     <NavLink
                         activeClassName={active}
