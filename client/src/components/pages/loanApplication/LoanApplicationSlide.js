@@ -1,41 +1,60 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './LoanApplicationSlide.module.scss';
 import Container from '../../UI/Container';
+import { round } from '../../../utilities/utilities';
+import MinusSign from '../../UI/SVG/MinusSign';
+import PlusSign from '../../UI/SVG/PlusSign';
+import SlideHandler from '../../UI/SVG/SlideHandler';
 
 const LoanApplicationSlide = () => {
     const maxAmount = 4000;
     const minAmount = 300;
     const scrollHandle = useRef();
-    const [amount, setAmount] = useState(2000);
-    // const [period, setPeriod] = useState(15);
+    const [amount, setAmount] = useState(4000);
 
-    const addAmount = () => {
-        if (amount < maxAmount) {
-            setAmount(amount + 10);
+    const addAmount = (e) => {
+
+        if (amount >= maxAmount) {
+            return setAmount(maxAmount);
+        }
+
+        const slideBar = e.currentTarget.previousElementSibling.firstElementChild;
+        const slide = e.currentTarget.previousElementSibling;
+
+        const slideBarWidth = Math.floor(((amount + 10) / maxAmount) * slide.offsetWidth);
+        slideBar.style.width = slideBarWidth + "px";
+
+        setAmount(amount + 10);
+    }
+
+    const subtractAmount = (e) => {
+
+        const slideBar = e.currentTarget.nextElementSibling.firstElementChild;
+        const slide = e.currentTarget.nextElementSibling;
+
+        const slideBarWidth = Math.floor(((amount - 10) / maxAmount) * slide.offsetWidth);
+        slideBar.style.width = slideBarWidth + "px";
+
+        setAmount(amount - 10);
+
+        if (amount <= minAmount) {
+            setAmount(minAmount);
         }
     }
 
-    const subtractAmount = () => {
-        if (amount > minAmount) {
-            setAmount(amount - 10)
-        }
-    }
-
-    const dragSlideHandle = element => {
+    const dragSlideHandle = (element, amount, maxAmount, setAmount) => {
 
         const slideBar = element.parentElement;
         const slide = element.parentElement.parentElement;
 
-        console.dir(element)
-        console.dir(slideBar.parentElement.parentElement);
+        // slideBar min width in pixels;
+        const slideBarMinWidth = Math.ceil((minAmount / maxAmount) * slide.offsetWidth);
 
         let pos1 = 0, pos2 = 0;
 
         const closeDragElement = () => {
-            console.log('Stop dragging');
             document.onmouseup = null;
             document.onmousemove = null;
-            element.style.right = "0";
         }
 
         const elementDrag = e => {
@@ -47,36 +66,36 @@ const LoanApplicationSlide = () => {
             // update initial position
             pos1 = e.clientX;
 
+            // calculate current amount based on the width of the slide bar 
+            let currentAmount = maxAmount * ((slideBar.offsetWidth) / slide.offsetWidth);
 
-            console.log('Position movement: ' + pos2);
-            console.log("Bar width: " + slideBar.offsetWidth + " Bar container width: " + slide.offsetWidth);
-
-            // set amount 
-            let currentAmount = maxAmount * (slideBar.offsetWidth / slide.offsetWidth);
-            setAmount(Math.floor(currentAmount));
-
+            /**
+             *  Round to the nearest R10, if currentAmount > maxAmount return maxAmount.
+             *  if current amount is < min amount return minAmount.
+             */
+            setAmount(round(currentAmount, 10, minAmount, maxAmount));
 
 
-            if (slideBar.offsetWidth < slide.offsetWidth && slideBar.offsetWidth > 60) {
+            if (slideBar.offsetWidth < slide.offsetWidth && slideBar.offsetWidth > slideBarMinWidth - 1) {
                 // Between full length and 60 witch is just less than the toggle size;
-                element.style.cssText = `position: absolute ; right:${(element.offsetLeft - pos2)}px;`;
                 slideBar.style.width = (slideBar.offsetWidth - pos2) + "px";
+
             } else if (slideBar.offsetWidth > slide.offsetWidth) {
                 // At the end of the bar or full bar;
-                console.log('I am here')
-                // slideBar.style.width = slide.offsetWidth + "px";
-                element.style.cssText = "right: 0; position: relative";
 
-            } else if (slideBar.offsetWidth <= 60 && pos2 < 1) {
+                slideBar.style.width = slide.offsetWidth + "px";
+
+                closeDragElement();
+
+            } else if (slideBar.offsetWidth < slideBarMinWidth) {
                 // if its less than 60
-                element.style.cssText = `position: absolute ; right:${(element.offsetLeft - pos2)}px;`;
-                // slideBar.style.width = (60 - slideBar.offsetWidth + 61) + "px";
+                slideBar.style.width = slideBarMinWidth + "px";
 
-            } else if (slideBar.offsetWidth == slide.offsetWidth) {
+                closeDragElement();
+
+            } else if (slideBar.offsetWidth === slide.offsetWidth) {
                 slideBar.style.width = (slideBar.offsetWidth - pos2) + "px";
             }
-
-            element.style.right = "0";
         }
 
         const dragMouseDown = e => {
@@ -99,7 +118,7 @@ const LoanApplicationSlide = () => {
 
 
     useEffect(() => {
-        dragSlideHandle(scrollHandle.current);
+        dragSlideHandle(scrollHandle.current, amount, maxAmount, setAmount);
     }, [])
 
     return (
@@ -113,7 +132,7 @@ const LoanApplicationSlide = () => {
                         <div className={classes.AmountAndPeriod}>
                             <div className={classes.Details}>
                                 <h5>Loan Amount </h5>
-                                <h3>R {amount}</h3>
+                                <h3>R {amount.toLocaleString()}</h3>
                             </div>
                             <div className={classes.Details}>
                                 <h5>Loan Period</h5>
@@ -123,55 +142,48 @@ const LoanApplicationSlide = () => {
                     </div>
 
                     <div className={classes.AmountSlide}>
-                        <h3>Select your amount</h3>
+
+                        <h3 className="text-center mb-2 text-lg font-bold">Select your amount</h3>
+
                         <div className={classes.Slide}>
                             <div className={classes.PlusSign}
                                 onClick={subtractAmount}
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <MinusSign />
                             </div>
                             <div className={classes.Slider}>
-                                <div className={classes.MoneyBar} style={{ width: `${amount / maxAmount * 100}%` }}>
+                                <div className={classes.MoneyBar} style={{ width: `${100}%` }}>
                                     <div className={classes.SlideHandle} ref={scrollHandle}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                                        </svg>
+                                        <SlideHandler />
                                     </div>
                                 </div>
                             </div>
                             <div className={classes.PlusSign}
                                 onClick={addAmount}
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <PlusSign />
                             </div>
                         </div>
                     </div>
 
                     <div className={classes.AmountSlide}>
-                        <h3>Select Period</h3>
+                        <h3 className="text-center mb-2 text-lg font-bold">Select Period</h3>
+
                         <div className={classes.Slide}>
                             <div className={classes.PlusSign}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <MinusSign />
                             </div>
+
                             <div className={classes.Slider}>
                                 <div className={classes.MoneyBar}>
                                     <div className={classes.SlideHandle}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                                        </svg>
+                                        <SlideHandler />
                                     </div>
                                 </div>
                             </div>
+
                             <div className={classes.PlusSign}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <PlusSign />
                             </div>
                         </div>
                     </div>
