@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './LoanApplicationSlide.module.scss';
 import Container from '../../UI/Container';
-import { round } from '../../../utilities/utilities';
+import { round, clearSelection } from '../../../utilities/utilities';
 import MinusSign from '../../UI/SVG/MinusSign';
 import PlusSign from '../../UI/SVG/PlusSign';
 import SlideHandler from '../../UI/SVG/SlideHandler';
@@ -13,6 +13,7 @@ const LoanApplicationSlide = () => {
     const [amount, setAmount] = useState(4000);
 
     const addAmount = (e) => {
+        e.preventDefault();
 
         if (amount >= maxAmount) {
             return setAmount(maxAmount);
@@ -25,9 +26,12 @@ const LoanApplicationSlide = () => {
         slideBar.style.width = slideBarWidth + "px";
 
         setAmount(amount + 10);
+
+        clearSelection();
     }
 
     const subtractAmount = (e) => {
+        e.preventDefault();
 
         const slideBar = e.currentTarget.nextElementSibling.firstElementChild;
         const slide = e.currentTarget.nextElementSibling;
@@ -141,7 +145,7 @@ const LoanApplicationSlide = () => {
                         </div>
                     </div>
 
-                    <div className={classes.AmountSlide}>
+                    <div className={classes.SlideContainer}>
 
                         <h3 className="text-center mb-2 text-lg font-bold">Select your amount</h3>
 
@@ -166,7 +170,7 @@ const LoanApplicationSlide = () => {
                         </div>
                     </div>
 
-                    <div className={classes.AmountSlide}>
+                    <div className={classes.SlideContainer}>
                         <h3 className="text-center mb-2 text-lg font-bold">Select Period</h3>
 
                         <div className={classes.Slide}>

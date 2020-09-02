@@ -25,50 +25,59 @@
             }
         }
     }
-    .Slide {
-        // border: 1px solid teal;
-        padding: 1rem;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-bottom: 3rem;
-        .PlusSign {
-            // border: 1px solid green;
-            cursor: pointer;
-            svg {
-                width: 30px;
-                color: grey;
+    .SlideContainer {
+            /* Prevent selection of text when clicking fast on buttons*/
+            user-select: none; /* standard syntax */
+            -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+            -moz-user-select: none; /* mozilla browsers */
+            -khtml-user-select: none; /* webkit (konqueror) browsers */
+            -ms-user-select: none; /* IE10+ */
+        
+        .Slide {
+            // border: 1px solid teal;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 3rem;
+            .PlusSign {
+                // border: 1px solid green;
+                cursor: pointer;
+                svg {
+                    width: 30px;
+                    color: grey;
+                }
             }
-        }
-        .Slider {
-            position: relative;
-            width: 90%;
-            height: 20px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            .MoneyBar {
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                background: teal;
-                border-radius: 9px;
+            .Slider {
                 position: relative;
-                height: 100%;
-                width: 50%;
-                position: relative;
-                .SlideHandle {
-                    border-radius: 50%;
-                    cursor: pointer;
-                    background: #fff;
-                    right: 0;
-                    border: 1px solid #e2e8f0;
+                width: 90%;
+                height: 20px;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                .MoneyBar {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    background: teal;
+                    border-radius: 9px;
                     position: relative;
-                    width: 62px !important;
-                    height: 62px !important;
-                    padding: 10px;
-                    svg {
-                        width: 40px;
-                        color: #969696;
+                    height: 100%;
+                    width: 50%;
+                    position: relative;
+                    .SlideHandle {
+                        border-radius: 50%;
+                        cursor: pointer;
+                        background: #fff;
+                        right: 0;
+                        border: 1px solid #e2e8f0;
+                        position: relative;
+                        width: 62px !important;
+                        height: 62px !important;
+                        padding: 10px;
+                        svg {
+                            width: 40px;
+                            color: #969696;
+                        }
                     }
                 }
             }
