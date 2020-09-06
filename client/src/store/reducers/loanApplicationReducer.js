@@ -27,7 +27,6 @@ const reducer = (state = initialState, action) => {
                 applying: false,
                 message: action.payload.message
             }
-
         default:
             return state;
     }

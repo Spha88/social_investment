@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import classes from './LoanApplicationSlide.module.scss';
+
+import { connect } from 'react-redux';
+import { applyForLoan } from '../../../store/actions/loanApplicationAction';
+
 import Container from '../../UI/Container';
 import { dragSlide, addAmount, subtractAmount } from '../../../utilities/utilities';
 import MinusSign from '../../UI/SVG/MinusSign';
@@ -8,8 +12,9 @@ import PlusSign from '../../UI/SVG/PlusSign';
 import SlideHandler from '../../UI/SVG/SlideHandler';
 import Slide from '../../../utilities/Slide';
 import Loan from '../../../utilities/LoanCalculator';
+import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
-const LoanApplicationSlide = () => {
+const LoanApplicationSlide = ({ applyForLoan, applying }) => {
     const maxAmount = 4000;
     const minAmount = 500;
     const scrollHandle = useRef();
@@ -22,6 +27,10 @@ const LoanApplicationSlide = () => {
 
     const loan = new Loan(amount, period, 0.10);
 
+    const loanApplication = () => {
+        applyForLoan(amount, period);
+    }
+
     useEffect(() => {
         dragSlide(scrollHandle.current, minAmount, maxAmount, setAmount);
     }, [amount, minAmount, maxAmount])
@@ -31,6 +40,9 @@ const LoanApplicationSlide = () => {
             <section className={classes.LoanApplicationSlide}>
                 <header className="p-10">
                     <h3 className="text-4xl text-center">Apply For a Loan</h3>
+
+                    {/** Show spinner why loan application is in progress */}
+                    {applying && <SpinnerSmall />}
                 </header>
                 <main>
                     <div className={classes.LoanDetails}>
@@ -62,7 +74,7 @@ const LoanApplicationSlide = () => {
                         </div>
 
                         <div className={classes.ApplyBtnContainer}>
-                            <button>
+                            <button onClick={loanApplication}>
                                 Apply
                             </button>
                         </div>
@@ -122,4 +134,8 @@ const LoanApplicationSlide = () => {
     )
 }
 
-export default LoanApplicationSlide;
+const mapStateToProps = state => ({
+    applying: state.loan.applying
+})
+
+export default connect(mapStateToProps, { applyForLoan })(LoanApplicationSlide);

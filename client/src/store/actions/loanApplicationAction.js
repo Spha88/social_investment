@@ -1,7 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import axios from '../../axios-api';
 
-export const fetchProfile = () => dispatch => {
+export const applyForLoan = () => dispatch => {
     dispatch({ type: actionTypes.APPLYING_FOR_LOAN });
 
     axios.get('/profile')
