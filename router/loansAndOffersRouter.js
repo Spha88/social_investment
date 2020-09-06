@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const loanController = require('../controllers/loanController');
 const offerController = require('../controllers/offerController');
+const passport = require('passport');
 
+const requireAuth = passport.authenticate('jwt', { session: false });
+
+router.use(requireAuth);
 
 // INDEX
 // URL: GET - /loans

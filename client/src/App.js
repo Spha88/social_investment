@@ -8,7 +8,6 @@ import { checkLoggedIn } from './store/actions/authentication';
 import Navigation from './components/navigation/navigation';
 import Home from './components/pages/home/home';
 import Loans from './components/pages/loans/Loans';
-import LoanApplication from './components/pages/loanApplication/LoanApplication';
 import Profile from './components/pages/Profile/Profile';
 import Login from './components/pages/Login/Login';
 import Signup from './components/pages/Signup/Signup';

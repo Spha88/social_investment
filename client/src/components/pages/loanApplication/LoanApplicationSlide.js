@@ -14,7 +14,7 @@ import Slide from '../../../utilities/Slide';
 import Loan from '../../../utilities/LoanCalculator';
 import SpinnerSmall from '../../UI/SpinnerSmall/SpinnerSmall';
 
-const LoanApplicationSlide = ({ applyForLoan, applying }) => {
+const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
     const maxAmount = 4000;
     const minAmount = 500;
     const scrollHandle = useRef();
@@ -28,7 +28,7 @@ const LoanApplicationSlide = ({ applyForLoan, applying }) => {
     const loan = new Loan(amount, period, 0.10);
 
     const loanApplication = () => {
-        applyForLoan(amount, period);
+        applyForLoan(amount, Math.round(period));
     }
 
     useEffect(() => {
@@ -41,8 +41,17 @@ const LoanApplicationSlide = ({ applyForLoan, applying }) => {
                 <header className="p-10">
                     <h3 className="text-4xl text-center">Apply For a Loan</h3>
 
-                    {/** Show spinner why loan application is in progress */}
-                    {applying && <SpinnerSmall />}
+                    <div className="flex justify-center">
+                        {/** Show spinner why loan application is in progress */}
+                        {applying && <SpinnerSmall />}
+                    </div>
+
+                    {message && (
+                        <div className="flex justify-center mt-3 mx-auto rounded border p-5 w-1/2 ">
+                            <h2 className="text-2xl text-teal-500 bold">{message}</h2>
+                        </div>
+                    )}
+
                 </header>
                 <main>
                     <div className={classes.LoanDetails}>
@@ -135,7 +144,8 @@ const LoanApplicationSlide = ({ applyForLoan, applying }) => {
 }
 
 const mapStateToProps = state => ({
-    applying: state.loan.applying
+    applying: state.loan.applying,
+    message: state.loan.message
 })
 
 export default connect(mapStateToProps, { applyForLoan })(LoanApplicationSlide);

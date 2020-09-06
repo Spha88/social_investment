@@ -1,8 +1,9 @@
 const { body, validationResult } = require('express-validator');
 const async = require('async');
+const moment = require('moment');
 
 const Loan = require('../models/loanModel');
-const moment = require('moment');
+const LoanCalculator = require('../utilities/LoanCalculator');
 
 
 
@@ -27,9 +28,6 @@ exports.createLoan = [
     body('amount')
         .notEmpty().withMessage('Amount should not be empty')
         .isInt().withMessage('Amount must be an integer'),
-    body('interest')
-        .notEmpty().withMessage('Interest should not be empty')
-        .isFloat().withMessage('Interest should be a float'),
     body('term')
         .notEmpty().withMessage('Term should not be empty')
         .isInt().withMessage('Term should be a number with no decimal'),
@@ -43,12 +41,17 @@ exports.createLoan = [
         }
 
         // If no errors create a Loan and save to DB
+        const calculated = new LoanCalculator(req.body.amount, req.body.term, 0.10);
+
         const loan = new Loan({
             amount: req.body.amount,
-            interest: req.body.interest,
+            interest: 0.10,
             term: req.body.term,
-            applicant: req.body.applicant
+            applicant: req.user._id
         })
+
+        console.log(loan);
+        console.log(req.user);
 
         loan.save(err => {
 

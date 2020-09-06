@@ -20,14 +20,14 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={classes.HomeImage}>
-                    <img src={moneyImg} alt="Landing image" />
+                    <img src={moneyImg} alt="Landing" />
                 </div>
             </div>
 
             <div className={`${classes.FinancialFreedom}`}>
 
                 <div className={classes.Image}>
-                    <img src={freedomImg} alt="Landing image" />
+                    <img src={freedomImg} alt="Landing" />
                 </div>
                 <div className={classes.HomeParagraph}>
                     <h2><span>Financial</span> Freedom</h2>

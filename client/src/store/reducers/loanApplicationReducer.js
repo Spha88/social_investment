@@ -19,13 +19,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 applying: false,
-                message: action.payload.message,
+                message: action.payload,
             }
         case actionTypes.APPLYING_FOR_LOAN_FAILED:
             return {
                 ...state,
                 applying: false,
-                message: action.payload.message
+                message: "Loan application not successful"
             }
         default:
             return state;
