@@ -37,6 +37,25 @@
                 }
             }
         }
+        .ApplyBtnContainer {
+            text-align: center;
+            margin-top: 2rem;
+            button {
+                background: #2D4059;
+                color: #fff;
+                padding: .6em 3em;
+                border-radius: 5px;
+                transition: all 500ms ease;
+                &:hover {
+                    background: #EA5455;
+                    cursor: pointer;
+                }
+                &:active,
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
     }
     .SlideContainer {
             /* Prevent selection of text when clicking fast on buttons*/

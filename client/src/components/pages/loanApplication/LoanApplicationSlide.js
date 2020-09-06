@@ -60,6 +60,13 @@ const LoanApplicationSlide = () => {
                                 <p className="text-sm">Interest and fees</p>
                             </div>
                         </div>
+
+                        <div className={classes.ApplyBtnContainer}>
+                            <button>
+                                Apply
+                            </button>
+                        </div>
+
                     </div>
 
                     <div className={classes.SlideContainer}>
