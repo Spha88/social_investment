@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import logo from '../../assets/images/logo.svg';
 
 const navigation = ({ token }) => {
 
@@ -9,23 +10,18 @@ const navigation = ({ token }) => {
     return (
         <header className="text-gray-700">
             <div className="container mx-auto lg:px-5 bg-white mt-5 shadow-lg rounded flex flex-wrap p-5 flex-col md:flex-row items-center">
-                <NavLink to="/loans" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                    </svg>
+                <NavLink to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                    <img src={logo} alt="" />
                     <span className="ml-3 text-xl">Social <strong>Investment</strong></span>
                 </NavLink>
 
                 <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
                     <NavLink
                         activeClassName={active}
-                        className={navItemClasses} to="/loans">Loans</NavLink>
+                        className={navItemClasses} exact to="/">Home</NavLink>
                     <NavLink
                         activeClassName={active}
-                        className={navItemClasses} to="/apply">Get a loan</NavLink>
-                    <NavLink
-                        activeClassName={active}
-                        className={navItemClasses} to="/apply-slide">Apply Now</NavLink>
+                        className={navItemClasses} to="/apply">Apply Now</NavLink>
                     <NavLink
                         activeClassName={active}
                         className={navItemClasses} to="/profile">Profile</NavLink>

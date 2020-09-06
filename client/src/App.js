@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute';
 import { checkLoggedIn } from './store/actions/authentication';
 
 import Navigation from './components/navigation/navigation';
+import Home from './components/pages/home/home';
 import Loans from './components/pages/loans/Loans';
 import LoanApplication from './components/pages/loanApplication/LoanApplication';
 import Profile from './components/pages/Profile/Profile';
@@ -25,12 +26,12 @@ function App({ checkLoggedIn }) {
     <React.Fragment>
       <Navigation />
       <Switch>
+        <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/loans" component={Loans} />
         <Route path="/logout" component={LogoutPage} />
-        <ProtectedRoute path="/apply" component={LoanApplication} />
-        <ProtectedRoute path="/apply-slide" component={LoanApplicationSlide} />
+        <ProtectedRoute path="/apply" component={LoanApplicationSlide} />
         <ProtectedRoute path="/profile" component={Profile} />
 
       </Switch>
