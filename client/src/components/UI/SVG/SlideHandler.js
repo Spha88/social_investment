@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const SlideHandler = () => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="31" cy="31" r="29.5" stroke="#7A7A7A" stroke-width="3" />
+            <path d="M23.1668 22.6621L14.9655 31.5477L23.1668 39.3379" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" />
+            <path d="M38.6019 22.6621L46.8032 31.5477L38.6019 39.3379" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round" />
         </svg>
     )
 }

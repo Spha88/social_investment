@@ -9,7 +9,7 @@ export const formatDate = date => {
  * Return minAmount of num is less than minAmount
  * Return maxAmount of mum is greater than max amount
  */
-export const round = (num, precision, minAmount, maxAmount) => {
+export const roundToNearest = (num, precision, minAmount, maxAmount) => {
     num = parseFloat(num);
     if (!precision) return num;
 
@@ -95,7 +95,7 @@ export const dragSlide = (element, minAmount, maxAmount, setAmount) => {
          *  Round to the nearest R10, if currentAmount > maxAmount return maxAmount.
          *  if current amount is < min amount return minAmount.
          */
-        setAmount(round(currentAmount, 10, minAmount, maxAmount));
+        setAmount(roundToNearest(currentAmount, 10, minAmount, maxAmount));
 
 
         if (slideBar.offsetWidth < slide.offsetWidth && slideBar.offsetWidth > slideBarMinWidth - 1) {
@@ -137,4 +137,15 @@ export const dragSlide = (element, minAmount, maxAmount, setAmount) => {
 
     element.addEventListener('mousedown', dragMouseDown);
 
+}
+
+
+// // This function uses exponential notation
+export const roundToCurrency = (number) => {
+    let newNumber = Number(Math.round(number + "e2") + "e-2");
+
+    // Round to two decimal places and add a zero if the last decimal is 0;
+    // newNumber = (Math.round(newNumber * 100) / 100).toFixed(2);
+
+    return newNumber
 }

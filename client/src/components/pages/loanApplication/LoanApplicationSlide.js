@@ -1,28 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
+import moment from 'moment';
 import classes from './LoanApplicationSlide.module.scss';
 import Container from '../../UI/Container';
 import { dragSlide, addAmount, subtractAmount } from '../../../utilities/utilities';
 import MinusSign from '../../UI/SVG/MinusSign';
 import PlusSign from '../../UI/SVG/PlusSign';
 import SlideHandler from '../../UI/SVG/SlideHandler';
+import Slide from '../../../utilities/Slide';
+import Loan from '../../../utilities/LoanCalculator';
 
 const LoanApplicationSlide = () => {
     const maxAmount = 4000;
     const minAmount = 500;
     const scrollHandle = useRef();
+    const periodSlide = useRef();
     const [amount, setAmount] = useState(4000);
+    const [period, setPeriod] = useState(15);
 
+    const slide = new Slide(periodSlide.current, period, setPeriod);
+    slide.init(period);
 
+    const loan = new Loan(amount, period, 0.10);
 
     useEffect(() => {
         dragSlide(scrollHandle.current, minAmount, maxAmount, setAmount);
-    }, [amount])
+    }, [amount, minAmount, maxAmount])
 
     return (
         <Container>
             <section className={classes.LoanApplicationSlide}>
                 <header className="p-10">
-                    <h3 className="text-2xl text-center">Apply For a Loan</h3>
+                    <h3 className="text-4xl text-center">Apply For a Loan</h3>
                 </header>
                 <main>
                     <div className={classes.LoanDetails}>
@@ -33,7 +41,23 @@ const LoanApplicationSlide = () => {
                             </div>
                             <div className={classes.Details}>
                                 <h5>Loan Period</h5>
-                                <h3>15 <span>Days</span></h3>
+                                <h3>{Math.round(period)} <span>Days</span></h3>
+                            </div>
+                        </div>
+
+
+                        <div className={classes.Payment}>
+                            <div>
+                                <h2>{moment().add(period, 'day').format('dd DD MMMM')}</h2>
+                                <p className="text-sm">Settlement Date</p>
+                            </div>
+                            <div>
+                                <h2>R {(Math.round((amount + loan.fees()) * 100) / 100).toFixed(2)}</h2>
+                                <p className="text-sm">Settlement amount</p>
+                            </div>
+                            <div>
+                                <h2>R {(Math.round(loan.fees() * 100) / 100).toFixed(2)}</h2>
+                                <p className="text-sm">Interest and fees</p>
                             </div>
                         </div>
                     </div>
@@ -65,8 +89,7 @@ const LoanApplicationSlide = () => {
 
                     <div className={classes.SlideContainer}>
                         <h3 className="text-center mb-2 text-lg font-bold">Select Period</h3>
-
-                        <div className={classes.Slide}>
+                        <div className={classes.Slide} ref={periodSlide}>
 
                             <div className={classes.PlusSign}>
                                 <MinusSign />
@@ -83,7 +106,6 @@ const LoanApplicationSlide = () => {
                             <div className={classes.PlusSign}>
                                 <PlusSign />
                             </div>
-
                         </div>
                     </div>
                 </main>

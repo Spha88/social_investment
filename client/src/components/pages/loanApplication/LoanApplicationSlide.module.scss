@@ -24,6 +24,19 @@
                 }
             }
         }
+        .Payment {
+            display: flex;
+            justify-content: center;
+            margin-top: 2em;
+            div {
+                width: 30%;
+                text-align: center;
+                h2 {
+                    font-size: 2em;
+                    line-height: 1.2em;
+                }
+            }
+        }
     }
     .SlideContainer {
             /* Prevent selection of text when clicking fast on buttons*/
@@ -69,14 +82,12 @@
                         cursor: pointer;
                         background: #fff;
                         right: 0;
-                        border: 1px solid #e2e8f0;
                         position: relative;
                         width: 62px !important;
                         height: 62px !important;
-                        padding: 10px;
                         svg {
-                            width: 40px;
-                            color: #969696;
+                            width: 62px;
+                            // color: #969696;
                         }
                     }
                 }
