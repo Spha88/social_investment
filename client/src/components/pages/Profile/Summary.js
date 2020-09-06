@@ -15,7 +15,7 @@ const Summary = ({ profile }) => {
                 <h2 className="text-2xl font-light">
                     According to your credit score you can borrow R5000
                     <br />
-                    <Link to="/apply-slide"
+                    <Link to="/apply"
                         className="bg-teal-500 rounded text-white px-8 py-1 mt-5 inline-block text-xl hover:bg-teal-800">
                         Apply Now</Link>
                 </h2>
