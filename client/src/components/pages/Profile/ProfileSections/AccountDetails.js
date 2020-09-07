@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import moment from 'moment';
 
-const AccountDetails = () => {
+const AccountDetails = ({ loan }) => {
+    console.log(loan);
     return (
         <div className="rounded">
             <header
@@ -19,61 +22,61 @@ const AccountDetails = () => {
                 <header
                     className="flex justify-between cursor-pointer px-10 py-5 hover:bg-blue-100 border-b">
                     <h3 className="text-2xl font-light">
-                        Personal Details
+                        Loan Details
                 </h3>
                 </header>
-                <main className={`block px-10 py-5`}>
+                <main className={`block px-8 py-5`}>
                     <ul className=" divide-y divide-gray-400">
-                        <li className="flex items-stretch py-3">
+                        <li className="flex items-stretch py-3 px-3 hover:bg-gray-100">
                             <div className="w-1/2">
                                 Issued On
                             </div>
                             <div className="w-1/2">
-                                15 September 2020
+                                {moment(loan.applicationDate).format('DD MMMM YYYY')}
                             </div>
                         </li>
-                        <li className="flex items-stretch py-3">
+                        <li className="flex items-stretch py-3 px-3 hover:bg-gray-100">
                             <div className="w-1/2">
                                 Principle Amount
                             </div>
                             <div className="w-1/2">
-                                R4000
+                                R {loan.amount}
                             </div>
                         </li>
 
-                        <li className="flex items-stretch py-3">
+                        <li className="flex items-stretch py-3 px-3 hover:bg-gray-100">
                             <div className="w-1/2">
                                 Period
                             </div>
                             <div className="w-1/2">
-                                15 days
+                                {loan.term} days
                             </div>
                         </li>
 
-                        <li className="flex items-stretch py-3">
+                        <li className="flex items-stretch py-3 px-3 hover:bg-gray-100">
                             <div className="w-1/2">
                                 Fees and Interest
                             </div>
                             <div className="w-1/2">
-                                R320
+                                R {loan.initiationFee + loan.vat + loan.interestAmount}
                             </div>
                         </li>
 
-                        <li className="flex items-stretch py-3">
+                        <li className="flex items-stretch py-3 px-3 hover:bg-gray-100">
                             <div className="w-1/2">
                                 Amount Due
                             </div>
                             <div className="w-1/2">
-                                R 4 674.675
+                                R {loan.totalRepayment}
                             </div>
                         </li>
 
-                        <li className="flex items-stretch py-3">
+                        <li className="flex items-stretch py-3 px-3 hover:bg-gray-100">
                             <div className="w-1/2">
                                 Due Date
                             </div>
                             <div className="w-1/2">
-                                15 October 2020
+                                {moment(loan.paymentDate).format('DD MMMM YYYY')}
                             </div>
                         </li>
                     </ul>
@@ -83,5 +86,8 @@ const AccountDetails = () => {
         </div>
     )
 }
+const mapStateToProps = state => ({
+    loan: state.profile.loan
+})
 
-export default AccountDetails;
+export default connect(mapStateToProps)(AccountDetails);

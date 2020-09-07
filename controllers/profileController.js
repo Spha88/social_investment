@@ -3,13 +3,19 @@ const async = require('async');
 const moment = require('moment');
 
 const User = require('../models/userModel');
+const Loan = require('../models/loanModel');
 const { json } = require('express');
 
 exports.getProfile = (req, res, next) => {
-    User.findById(req.user._id, (err, user) => {
-        if (err) { return res.json({ error: 'Error fetching user data' }) };
-        if (!user) { return res.json({ error: 'User does not exist' }) }
-        res.json({ user: user });
+    async.parallel({
+        profile: callback => User.findById(req.user._id).select('-password').exec(callback),
+        loan: callback => Loan.findOne({ applicant: req.user._id }).exec(callback)
+    }, (err, results) => {
+        if (err) {
+            console.log(err)
+            return res.status(400).json({ error: 'Error could not get profile and loan details' });
+        }
+        res.json({ user: results.profile, loan: results.loan });
     })
 }
 

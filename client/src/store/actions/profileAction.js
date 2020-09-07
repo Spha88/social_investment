@@ -36,13 +36,13 @@ export const fetchProfile = () => dispatch => {
         .then(res => {
             dispatch({
                 type: actionTypes.FETCHING_PROFILE_SUCCESS,
-                payload: res.data.user
+                payload: res.data
             })
         })
         .catch(err => {
-            if (err.response.data === "Unauthorized") {
+            if (err && err.response.data === "Unauthorized") {
                 localStorage.removeItem('token');
-                dispatch({ type: actionTypes.LOGOUT })
+                return dispatch({ type: actionTypes.LOGOUT })
             }
             dispatch({
                 type: actionTypes.FETCHING_PROFILE_FAILED,

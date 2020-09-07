@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
     profile: '',
+    loan: '',
     updating: false,
     error: false,
     message: '',
@@ -48,7 +49,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 fetchingProfile: false,
-                profile: action.payload
+                profile: action.payload.user,
+                loan: action.payload.loan
             }
         case actionTypes.FETCHING_PROFILE_FAILED:
             return {
