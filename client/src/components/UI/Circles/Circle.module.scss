@@ -1,0 +1,52 @@
+.Circles {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    top: 0;
+    img {
+        width: 80%;
+    }
+    .CircleOne {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        animation: circleone 4000ms linear 100ms infinite alternate;
+    }
+    .CircleTwo {
+        z-index: 2;
+        top: 0;
+        left: 0;
+        position: absolute;
+        animation: circletwo 4000ms linear 100ms infinite alternate;
+    }
+    .CircleThree {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: .2;
+        z-index: 3;
+        animation: circlethree 4000ms linear 100ms infinite alternate;
+    }
+}
+
+@keyframes circleone {
+    0% { top: 0; left: 0 }
+    50% { top: 10px; left: 40px }
+    75% { top: 10; left: 0}
+    100% { top: 30px; left: 0px }
+}
+
+@keyframes circletwo {
+    0% { top: 0; left: 0 }
+    50% { top: 20px; left: 30px }
+    100% { top: 30px; left: 0px }
+}
+
+@keyframes circlethree {
+    0% { top: 0; left: 0; opacity: .3 }
+    50% { top: 40px; left: 75px; opacity: 0 }
+    75% { top: 0; left: 0; opacity: 0;}
+    100% { top: 60px; left: 0px; opacity: .2 }
+}

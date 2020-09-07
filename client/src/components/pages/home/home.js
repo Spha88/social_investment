@@ -3,6 +3,7 @@ import classes from './home.module.scss';
 import moneyImg from '../../../assets/images/money.png';
 import freedomImg from '../../../assets/images/freedom.png';
 import { Link } from 'react-router-dom';
+import Circles from '../../UI/Circles/Circles';
 
 const Home = () => {
     return (
@@ -20,7 +21,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={classes.HomeImage}>
-                    <img src={moneyImg} alt="Landing" />
+                    <Circles />
                 </div>
             </div>
 
