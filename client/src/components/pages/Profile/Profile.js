@@ -10,6 +10,7 @@ import BankingDetails from './Forms/BankingDetailsForm';
 import { fetchProfile } from '../../../store/actions/profileAction';
 import Summary from './Summary';
 import AccountDetails from './ProfileSections/AccountDetails';
+import UpLoad from './Forms/UpLoad';
 
 
 const Profile = ({ fetchProfile }) => {
@@ -35,6 +36,7 @@ const Profile = ({ fetchProfile }) => {
                         <Route path="/profile/personal-details" component={PersonalDetails} />
                         <Route path="/profile/employer-details" component={EmployerDetails} />
                         <Route path="/profile/banking-details" component={BankingDetails} />
+                        <Route path="/profile/documents" component={UpLoad} />
                     </Switch>
                 </main>
             </div>

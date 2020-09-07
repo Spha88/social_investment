@@ -43,6 +43,14 @@ const ProfileNav = () => {
                     Banking details
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                    className={navLinkClasses}
+                    activeClassName={activeClassName}
+                    to="/profile/documents">
+                    Documents
+                </NavLink>
+            </li>
         </ul>
     )
 }
