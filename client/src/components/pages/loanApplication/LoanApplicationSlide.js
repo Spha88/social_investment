@@ -23,9 +23,8 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
     const [period, setPeriod] = useState(15);
 
     const slide = new Slide(periodSlide.current, period, setPeriod);
-    slide.init(period);
 
-    const loan = new Loan(amount, period, 0.10);
+    let loan = new Loan(amount, period, 0.10);
 
     const loanApplication = () => {
         applyForLoan(amount, Math.round(period));
@@ -33,7 +32,8 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
 
     useEffect(() => {
         dragSlide(scrollHandle.current, minAmount, maxAmount, setAmount);
-    }, [amount, minAmount, maxAmount])
+        slide.init(period);
+    }, [amount, minAmount, maxAmount, period])
 
     return (
         <Container>
@@ -69,16 +69,16 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
 
                         <div className={classes.Payment}>
                             <div>
-                                <h2>{moment().add(period, 'day').format('dd DD MMMM')}</h2>
-                                <p className="text-sm">Settlement Date</p>
+                                <h2>{moment().add(period, 'day').format('DD MMMM')}</h2>
+                                <p className="text-sm font-bold">Settlement Date</p>
                             </div>
                             <div>
                                 <h2>R {(Math.round((amount + loan.fees()) * 100) / 100).toFixed(2)}</h2>
-                                <p className="text-sm">Settlement amount</p>
+                                <p className="text-sm font-bold">Settlement amount</p>
                             </div>
                             <div>
                                 <h2>R {(Math.round(loan.fees() * 100) / 100).toFixed(2)}</h2>
-                                <p className="text-sm">Interest and fees</p>
+                                <p className="text-sm font-bold">Interest and fees</p>
                             </div>
                         </div>
 

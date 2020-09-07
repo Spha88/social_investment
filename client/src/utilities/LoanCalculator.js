@@ -10,6 +10,13 @@ class Loan {
         this.serviceFee = 69.50;
     }
 
+    init = () => {
+        this.initiationFee();
+        this.vat();
+        this.interest();
+        this.fees();
+    }
+
     initiationFee = () => {
         let initFee;
         if (this.p > 1000) {

@@ -9,6 +9,7 @@ import EmployerDetails from './Forms/EmployerDetailsForm';
 import BankingDetails from './Forms/BankingDetailsForm';
 import { fetchProfile } from '../../../store/actions/profileAction';
 import Summary from './Summary';
+import AccountDetails from './ProfileSections/AccountDetails';
 
 
 const Profile = ({ fetchProfile }) => {
@@ -30,9 +31,7 @@ const Profile = ({ fetchProfile }) => {
                 <main className="w-3/4 pt-0 pb-0 p-10">
                     <Switch>
                         <Route exact path="/profile" component={Summary} />
-                        <Route path="/profile/account">
-                            Soon to add account info on this page
-                        </Route>
+                        <Route path="/profile/account" component={AccountDetails} />
                         <Route path="/profile/personal-details" component={PersonalDetails} />
                         <Route path="/profile/employer-details" component={EmployerDetails} />
                         <Route path="/profile/banking-details" component={BankingDetails} />
