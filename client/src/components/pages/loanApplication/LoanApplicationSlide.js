@@ -23,7 +23,7 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
     const [period, setPeriod] = useState(15);
 
     const slide = new Slide(periodSlide.current, period, setPeriod);
-
+    slide.init(period);
     let loan = new Loan(amount, period, 0.10);
 
     const loanApplication = () => {
@@ -32,7 +32,7 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
 
     useEffect(() => {
         dragSlide(scrollHandle.current, minAmount, maxAmount, setAmount);
-        slide.init(period);
+
     }, [amount, minAmount, maxAmount, period])
 
     return (

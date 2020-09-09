@@ -1,0 +1,30 @@
+.Footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 1280px;
+    margin: 5rem auto;
+    padding: 2rem;
+    h2 {
+        font-weight: 500;
+        font-size: 1.3em;
+        margin-bottom: 1em;
+    }
+    .Logo {
+        display: flex;
+        align-items: center;
+        width: 35%;
+        img {
+            margin-right: 15px;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 100;
+            span { font-weight: 700;}
+        }
+    }
+
+    .Nav {
+        list-style: none;
+    }
+}

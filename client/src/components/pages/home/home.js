@@ -1,6 +1,5 @@
 import React from 'react';
-import classes from './home.module.scss';
-import moneyImg from '../../../assets/images/money.png';
+import classes from './Home.module.scss';
 import freedomImg from '../../../assets/images/freedom.png';
 import { Link } from 'react-router-dom';
 import Circles from '../../UI/Circles/Circles';

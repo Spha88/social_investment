@@ -11,7 +11,7 @@ const navigation = ({ token }) => {
         <header className="text-gray-700">
             <div className="container mx-auto lg:px-5 bg-white mt-5 shadow-lg rounded flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <NavLink to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                    <img src={logo} alt="" />
+                    <img src={logo} alt="company brand icon" />
                     <span className="ml-3 text-xl">Social <strong>Investment</strong></span>
                 </NavLink>
 

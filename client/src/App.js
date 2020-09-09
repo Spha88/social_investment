@@ -6,13 +6,14 @@ import ProtectedRoute from './ProtectedRoute';
 import { checkLoggedIn } from './store/actions/authentication';
 
 import Navigation from './components/navigation/navigation';
-import Home from './components/pages/home/home';
+import Home from './components/pages/home/Home';
 import Loans from './components/pages/loans/Loans';
 import Profile from './components/pages/Profile/Profile';
 import Login from './components/pages/Login/Login';
 import Signup from './components/pages/Signup/Signup';
 import LogoutPage from './components/pages/Logout/LogoutPage';
 import LoanApplicationSlide from './components/pages/loanApplication/LoanApplicationSlide';
+import Footer from './components/Footer/Footer';
 
 function App({ checkLoggedIn }) {
 
@@ -32,8 +33,8 @@ function App({ checkLoggedIn }) {
         <Route path="/logout" component={LogoutPage} />
         <ProtectedRoute path="/apply" component={LoanApplicationSlide} />
         <ProtectedRoute path="/profile" component={Profile} />
-
       </Switch>
+      <Footer />
     </React.Fragment>
   );
 }
