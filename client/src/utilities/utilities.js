@@ -95,7 +95,10 @@ export const dragSlide = (element, minAmount, maxAmount, setAmount) => {
          *  Round to the nearest R10, if currentAmount > maxAmount return maxAmount.
          *  if current amount is < min amount return minAmount.
          */
-        setAmount(roundToNearest(currentAmount, 10, minAmount, maxAmount));
+        currentAmount = roundToNearest(currentAmount, 10, minAmount, maxAmount)
+
+        // Set amount
+        setAmount(currentAmount);
 
 
         if (slideBar.offsetWidth < slide.offsetWidth && slideBar.offsetWidth > slideBarMinWidth - 1) {

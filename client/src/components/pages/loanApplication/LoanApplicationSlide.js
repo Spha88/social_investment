@@ -22,15 +22,30 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
     const [amount, setAmount] = useState(4000);
     const [period, setPeriod] = useState(15);
 
-    const slide = new Slide(periodSlide.current, period, setPeriod);
-    slide.init(period);
-    let loan = new Loan(amount, period, 0.10);
-
+    // invoked by click on apply button
     const loanApplication = () => {
+        {/** 
+            The loan amount and period are sent to the backend,
+            The interest, due date, settlement amount will then be calculated and
+            stored in the data base. 
+        */}
         applyForLoan(amount, Math.round(period));
     }
 
+    // This class controls the period slide selector and period
+    const slide = new Slide(periodSlide.current, period, setPeriod);
+    slide.init(period);
+
+    /**
+     * Calculates the settlement dates, settlement amount, interest and fees amount
+     * when the loan amount or period is changed
+     */
+    let loan = new Loan(amount, period, 0.10);
+
     useEffect(() => {
+        {/** 
+            The amount slide and amount are controlled by this function
+        */}
         dragSlide(scrollHandle.current, minAmount, maxAmount, setAmount);
 
     }, [amount, minAmount, maxAmount, period])
@@ -46,6 +61,7 @@ const LoanApplicationSlide = ({ applyForLoan, applying, message }) => {
                         {applying && <SpinnerSmall />}
                     </div>
 
+                    {/** Message displays when loan application is successful */}
                     {message && (
                         <div className="flex justify-center mt-3 mx-auto rounded border p-5 w-1/2 ">
                             <h2 className="text-2xl text-teal-500 bold">{message}</h2>

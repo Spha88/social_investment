@@ -32,3 +32,8 @@ exports.updateProfile = (req, res, next) => {
         res.json({ profile: user });
     })
 }
+
+exports.uploadDocument = (req, res, nex) => {
+    console.log(req.file);
+    res.json({ ok: 'you are in the server bitch' });
+}
